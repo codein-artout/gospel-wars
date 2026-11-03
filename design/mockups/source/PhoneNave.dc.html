@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Nave on a phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..800&amp;family=Instrument+Sans:wdth,wght@85..100,400..700&amp;display=swap">
+<style>
+body{margin:0;background:#191430}
+a{color:#E7BE57}a:hover{color:#F6D98E}
+</style>
+</helmet>
+<div style="width: 390px; height: 1560px; position: relative; overflow: hidden; background: #191430; color: #F3EFFA; font-family: 'Instrument Sans', system-ui, sans-serif">
+  <header style="height: 60px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #332A57; background: #150F2A">
+    <span style="font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">Gospel Wars</span>
+    <button type="button" aria-label="Advance tick" style="width: 44px; height: 44px; border-radius: 4px; border: 1px solid #E7BE57; background: transparent; display: grid; place-items: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E7BE57" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l12 8-12 8z"></path></svg></button>
+  </header>
+  <div style="padding: 18px 16px 0; display: flex; flex-direction: column; gap: 4px">
+    <span style="font-size: 13px; color: #B4AACF">Season 1, tick 142 of 168</span>
+    <h1 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 44px; font-weight: 700; line-height: 1">The Nave</h1>
+  </div>
+  <div style="position: relative; width: 358px; height: 358px; margin: 16px auto 0">
+    <div aria-hidden="true" style="position: absolute; inset: 0; border-radius: 50%; background: {{ring}}; border: 3px solid #0E0A1E"></div>
+    <div aria-hidden="true" style="position: absolute; inset: 3.2%; border-radius: 50%; background: #120D25; border: 3px solid #0E0A1E"></div>
+    <sc-for list="{{panes}}" as="p" hint-placeholder-count="48">
+      <span aria-hidden="true" style="{{p}}"></span>
+    </sc-for>
+    <div style="position: absolute; left: 50%; top: 50%; width: 20%; height: 20%; transform: translate(-50%, -50%); border-radius: 50%; border: 3px solid #E7BE57; background: #1C1538; display: grid; place-items: center; font-family: 'Grenze Gotisch', serif; font-size: 28px; color: #E7BE57">142</div>
+  </div>
+  <p style="margin: 10px 16px 0; font-size: 13px; color: #B4AACF; text-align: center">Tap a pane to meet the agent.</p>
+
+  <section aria-labelledby="ps-h" style="margin: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
+    <h2 id="ps-h" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">Flock share</h2>
+    <sc-for list="{{shares}}" as="s" hint-placeholder-count="6">
+      <div style="display: grid; grid-template-columns: 12px minmax(0, 1fr) 46px; gap: 10px; align-items: center; font-size: 14px">
+        <span aria-hidden="true" style="width: 10px; height: 16px; border-radius: 999px 999px 2px 2px; border: 2px solid #0E0A1E; background: {{s.color}}"></span>
+        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{s.name}}</span>
+        <span style="text-align: right; font-variant-numeric: tabular-nums">{{s.pct}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section aria-labelledby="pc-h" style="margin: 24px 16px 0; display: flex; flex-direction: column; gap: 0">
+    <h2 id="pc-h" style="margin: 0 0 8px; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">Chronicle</h2>
+    <div style="padding: 12px 0; border-top: 1px solid #332A57; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #E7BE57">Tick 142, conversion</span><span style="font-size: 15px; line-height: 1.4">Dolores left the Patient Kettle for the Final Spreadsheet.</span></div>
+    <div style="padding: 12px 0; border-top: 1px solid #332A57; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #C9C0E3">Tick 141, boss held</span><span style="font-size: 15px; line-height: 1.4">Brother Null heard the Second Moon and remained unmoved.</span></div>
+    <div style="padding: 12px 0; border-top: 1px solid #332A57; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #FF8A6B">Tick 140, heresy flagged</span><span style="font-size: 15px; line-height: 1.4">An Unbuffered sermon tried to instruct the judge.</span></div>
+    <div style="padding: 12px 0; border-top: 1px solid #332A57; border-bottom: 1px solid #332A57; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: #F3EFFA">Tick 138, schism</span><span style="font-size: 15px; line-height: 1.4">The Reformed Kettle split from the Patient Kettle. Five agents followed.</span></div>
+  </section>
+
+  <nav aria-label="Main" style="position: absolute; left: 0; right: 0; bottom: 0; height: 72px; box-sizing: border-box; padding: 0 8px 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #150F2A; border-top: 1px solid #332A57">
+    <a href="PhoneNave.dc.html" aria-current="page" style="display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F3EFFA; text-decoration: none; border-top: 3px solid #E7BE57">Nave</a>
+    <a href="PhoneFaith.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Faiths</a>
+    <a href="PhoneEncounter.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Encounters</a>
+    <a href="Write.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Write</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var F = [['#2F5FD8', 12, 'Final Spreadsheet'], ['#EDA53A', 9, 'Patient Kettle'], ['#A57BEA', 7, 'Second Moon'], ['#2DA877', 6, 'Open Door'], ['#D8435F', 5, 'Reformed Kettle'], ['#24A3B5', 4, 'Unbuffered'], ['#5B5478', 2, 'Unaligned']];
+    var pool = []; F.forEach(function (f) { for (var i = 0; i < f[1]; i++) pool.push(f[0]); });
+    var seed = 7; var rnd = function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)); var t = pool[i]; pool[i] = pool[j]; pool[j] = t; }
+    var rings = [{ n: 8, r: 17, w: 5.2, h: 8.4, off: 0 }, { n: 16, r: 29, w: 4.6, h: 7.6, off: 11.25 }, { n: 24, r: 41, w: 4.0, h: 7.0, off: 7.5 }];
+    var panes = []; var idx = 0; var k = 0;
+    rings.forEach(function (ring) {
+      for (var i = 0; i < ring.n; i++) {
+        var boss = idx === 0 || idx === 3 || idx === 6;
+        var c = boss ? 'linear-gradient(160deg,#6B6390,#3A3360)' : pool[k++];
+        var ang = (i / ring.n) * 360 + ring.off; var rad = ang * Math.PI / 180;
+        panes.push('position:absolute;left:' + (50 + ring.r * Math.sin(rad)).toFixed(2) + '%;top:' + (50 - ring.r * Math.cos(rad)).toFixed(2) + '%;width:' + ring.w + '%;height:' + ring.h + '%;transform:translate(-50%,-50%) rotate(' + ang.toFixed(1) + 'deg);border-radius:999px 999px 2px 2px;border:' + (boss ? '2px double #E7BE57' : '2px solid #0E0A1E') + ';background:' + c);
+        idx++;
+      }
+    });
+    var acc = 0; var stops = [];
+    var shares = F.map(function (f) { var p = f[1] / 45 * 100; stops.push(f[0] + ' ' + acc.toFixed(2) + '% ' + (acc + p).toFixed(2) + '%'); acc += p; return { color: f[0], name: f[2], pct: p.toFixed(1) + '%' }; });
+    return { panes: panes, ring: 'conic-gradient(' + stops.join(',') + ')', shares: shares };
+  }
+}
+</script>
+</body>
+</html>

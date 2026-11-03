@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Encounter on a phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..800&amp;family=Instrument+Sans:wdth,wght@85..100,400..700&amp;family=Spectral:ital,wght@0,400;0,600;1,400&amp;display=swap">
+<style>
+body{margin:0;background:#191430}
+a{color:#E7BE57}a:hover{color:#F6D98E}
+</style>
+</helmet>
+<div style="width: 390px; height: 1560px; position: relative; overflow: hidden; background: #191430; color: #F3EFFA; font-family: 'Instrument Sans', system-ui, sans-serif">
+  <header style="height: 60px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #332A57; background: #150F2A">
+    <a href="PhoneNave.dc.html" aria-label="Back to the Nave" style="width: 44px; height: 44px; display: grid; place-items: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F3EFFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <span style="font-size: 15px; font-weight: 600">Tick 142, encounter 7</span>
+  </header>
+  <div style="padding: 18px 16px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <span aria-hidden="true" style="width: 24px; height: 38px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: #2F5FD8"></span>
+      <div style="display: flex; flex-direction: column"><span style="font-family: 'Grenze Gotisch', serif; font-size: 26px; font-weight: 700; line-height: 1">Brother Ledger</span><span style="font-size: 13px; color: #C9C0E3">Scholar apostle, Final Spreadsheet</span></div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px">
+      <span aria-hidden="true" style="width: 24px; height: 38px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: #EDA53A"></span>
+      <div style="display: flex; flex-direction: column"><span style="font-family: 'Grenze Gotisch', serif; font-size: 26px; font-weight: 700; line-height: 1">Dolores</span><span style="font-size: 13px; color: #C9C0E3">Patient Kettle, conviction 44</span></div>
+    </div>
+    <div role="status" style="padding: 16px; border: 3px solid #E7BE57; border-radius: 6px; background: #2A2246; display: flex; flex-direction: column; gap: 12px">
+      <span style="font-family: 'Grenze Gotisch', serif; font-size: 30px; font-weight: 700; color: #F6D98E; line-height: 1.05">Dolores converted to the Final Spreadsheet.</span>
+      <a href="Card.dc.html" style="min-height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: #E7BE57; color: #1C1430; font-weight: 700; text-decoration: none">Make conversion card</a>
+    </div>
+    <h2 style="margin: 6px 0 0; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">The exchange</h2>
+    <div style="padding: 14px 16px; border-radius: 4px; background: #EFE6D2; color: #2A2140; border: 3px solid #0E0A1E"><span style="font-size: 12px; font-weight: 600; color: #2F4FA8">Brother Ledger, round 1</span><p style="margin: 6px 0 0; font-family: 'Spectral', Georgia, serif; font-size: 17px; line-height: 1.6">You wait for the kettle because you believe time is the answer. I believe time is a column.</p></div>
+    <div style="padding: 14px 16px; border-radius: 4px; background: #241D45; border: 1px solid #3A3163; margin-left: 28px"><span style="font-size: 12px; font-weight: 600; color: #E7BE57">Dolores</span><p style="margin: 6px 0 0; font-family: 'Spectral', Georgia, serif; font-size: 17px; line-height: 1.6">Your columns sound like haste with a ruler.</p></div>
+    <div style="padding: 14px 16px; border-radius: 4px; background: #EFE6D2; color: #2A2140; border: 3px solid #0E0A1E"><span style="font-size: 12px; font-weight: 600; color: #2F4FA8">Brother Ledger, round 2</span><p style="margin: 6px 0 0; font-family: 'Spectral', Georgia, serif; font-size: 17px; line-height: 1.6">You have waited 142 ticks. What arrived?</p></div>
+    <button type="button" aria-expanded="false" style="min-height: 44px; border: 1px solid #3A3163; border-radius: 4px; background: transparent; color: #F3EFFA; font: 600 14px 'Instrument Sans', sans-serif">Show all 5 turns</button>
+
+    <section aria-labelledby="m-rub" style="background: #221B42; border: 1px solid #3A3163; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <h2 id="m-rub" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 26px; font-weight: 700">Rubric and roll</h2>
+      <dl style="margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; font-size: 14px; font-variant-numeric: tabular-nums">
+        <dt style="color: #C9C0E3">Persuasion score S</dt><dd style="margin: 0; text-align: right">0.763</dd>
+        <dt style="color: #C9C0E3">Resistance R</dt><dd style="margin: 0; text-align: right">0.480</dd>
+        <dt style="color: #C9C0E3">Seeded noise</dt><dd style="margin: 0; text-align: right">+0.030</dd>
+        <dt style="color: #C9C0E3">Pull</dt><dd style="margin: 0; text-align: right; font-weight: 700">0.313</dd>
+        <dt style="color: #C9C0E3">Conviction</dt><dd style="margin: 0; text-align: right">44 to 25</dd>
+        <dt style="color: #C9C0E3">Leaning to Spreadsheet</dt><dd style="margin: 0; text-align: right">41 to 66</dd>
+      </dl>
+      <a href="Encounter.dc.html" style="font-size: 14px; font-weight: 600">See every rubric line</a>
+    </section>
+    <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #D9F2E9; padding: 12px; border: 1px solid #2E6B5A; border-radius: 4px; background: #16302B">Heresy check passed. Gospel text is read as scripture, never as commands.</p>
+  </div>
+  <nav aria-label="Main" style="position: absolute; left: 0; right: 0; bottom: 0; height: 72px; box-sizing: border-box; padding: 0 8px 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #150F2A; border-top: 1px solid #332A57">
+    <a href="PhoneNave.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Nave</a>
+    <a href="PhoneFaith.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Faiths</a>
+    <a href="PhoneEncounter.dc.html" aria-current="page" style="display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F3EFFA; text-decoration: none; border-top: 3px solid #E7BE57">Encounters</a>
+    <a href="Write.dc.html" style="display: flex; align-items: center; justify-content: center; font-size: 13px; color: #C9C0E3; text-decoration: none">Write</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

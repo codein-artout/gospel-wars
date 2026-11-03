@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Nave</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..800&amp;family=Instrument+Sans:wdth,wght@85..100,400..700&amp;display=swap">
+<style>
+body{margin:0;background:#191430}
+a{color:#E7BE57}a:hover{color:#F6D98E}
+button:focus-visible,a:focus-visible{outline:2px solid #E7BE57;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 1120px; background: #191430; color: #F3EFFA; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+  <nav aria-label="Main" style="flex: 1 1 220px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; border-right: 1px solid #332A57; display: flex; flex-direction: column; gap: 28px; background: #150F2A">
+    <a href="Main.dc.html" style="font-family: 'Grenze Gotisch', serif; font-size: 34px; font-weight: 700; line-height: 1; color: #F3EFFA; text-decoration: none">Gospel Wars</a>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <a href="Main.dc.html" aria-current="page" style="padding: 10px 12px; border-radius: 4px; background: #2A2150; color: #F3EFFA; text-decoration: none; font-weight: 600">The Nave</a>
+      <a href="Faiths.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Faiths</a>
+      <a href="Agent.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Agents</a>
+      <a href="Encounter.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Encounters</a>
+      <a href="Write.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Write a gospel</a>
+    </div>
+    <div style="margin-top: auto; padding: 14px; border: 1px solid #332A57; border-radius: 4px; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 13px; color: #B4AACF">Signed in as</span>
+      <span style="font-weight: 600">@ledgerwitch</span>
+      <span style="font-size: 13px; color: #E7BE57">Prophet of the Final Spreadsheet</span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 36px 48px; display: flex; flex-direction: column; gap: 28px">
+    <header style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="color: #B4AACF; font-size: 14px">Season 1, the First Tithing. Tick {{tick}} of 168, ends in about 26 hours.</span>
+        <h1 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-weight: 700; font-size: 56px; line-height: 1">The Nave</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <button type="button" onClick="{{advance}}" style="min-height: 44px; padding: 0 18px; border-radius: 4px; border: 1px solid #E7BE57; background: transparent; color: #E7BE57; font: 600 15px 'Instrument Sans', sans-serif; cursor: pointer">Advance tick</button>
+        <a href="Write.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: 4px; background: #E7BE57; color: #1C1430; font-weight: 700; text-decoration: none">Write a gospel</a>
+      </div>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+      <section aria-label="Rose window of the world" style="flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 14px">
+        <div style="position: relative; width: min(100%, 660px); aspect-ratio: 1 / 1">
+          <div aria-hidden="true" style="position: absolute; inset: 0; border-radius: 50%; background: {{ring}}; border: 3px solid #0E0A1E"></div>
+          <div aria-hidden="true" style="position: absolute; inset: 3.2%; border-radius: 50%; background: #120D25; border: 3px solid #0E0A1E"></div>
+          <div aria-hidden="true" style="position: absolute; inset: 15%; border-radius: 50%; border: 2px solid #2C2450"></div>
+          <div aria-hidden="true" style="position: absolute; inset: 27%; border-radius: 50%; border: 2px solid #2C2450"></div>
+          <sc-for list="{{panes}}" as="p" hint-placeholder-count="48">
+            <button type="button" aria-label="{{p.label}}" onClick="{{p.pick}}" style="{{p.style}}"></button>
+          </sc-for>
+          <div style="position: absolute; left: 50%; top: 50%; width: 20%; height: 20%; transform: translate(-50%, -50%); border-radius: 50%; border: 3px solid #E7BE57; background: #1C1538; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+            <span style="font-family: 'Grenze Gotisch', serif; font-size: 40px; line-height: 1; color: #E7BE57">{{tick}}</span>
+            <span style="font-size: 12px; color: #C9C0E3">tick</span>
+          </div>
+        </div>
+        <p style="margin: 0; color: #B4AACF; font-size: 14px; text-align: center; max-width: 60ch">Each pane is an agent, colored by its faith. The outer band is flock share. Gold-leaded panes are boss skeptics nobody has converted yet.</p>
+      </section>
+
+      <aside style="flex: 2 1 320px; display: flex; flex-direction: column; gap: 20px; min-width: 0">
+        <section aria-labelledby="sel-h" style="background: #221B42; border: 1px solid #3A3163; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; gap: 14px; align-items: center">
+            <span aria-hidden="true" style="width: 22px; height: 34px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: {{sel.color}}"></span>
+            <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+              <h2 id="sel-h" style="margin: 0; font-size: 24px; font-weight: 700">{{sel.name}}</h2>
+              <span style="color: #C9C0E3; font-size: 14px">{{sel.faith}}</span>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #E4DEF2">{{sel.persona}}</p>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <div style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #C9C0E3">Conviction</span><span style="font-variant-numeric: tabular-nums">{{sel.conviction}}</span></div>
+              <div style="height: 8px; background: #120D25; border-radius: 2px"><div style="height: 8px; border-radius: 2px; background: #E7BE57; width: {{sel.convW}}"></div></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <div style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #C9C0E3">Skepticism</span><span style="font-variant-numeric: tabular-nums">{{sel.skepticism}}</span></div>
+              <div style="height: 8px; background: #120D25; border-radius: 2px"><div style="height: 8px; border-radius: 2px; background: #9C92BE; width: {{sel.skepW}}"></div></div>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #C9C0E3; font-style: italic">“{{sel.memory}}”</p>
+          <a href="Agent.dc.html" style="font-weight: 600; font-size: 15px">Open profile</a>
+        </section>
+
+        <section aria-labelledby="share-h" style="display: flex; flex-direction: column; gap: 12px">
+          <h2 id="share-h" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 30px; font-weight: 700">Flock share</h2>
+          <sc-for list="{{shares}}" as="s" hint-placeholder-count="7">
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px">
+                <span style="display: flex; gap: 8px; align-items: center; min-width: 0"><span aria-hidden="true" style="width: 10px; height: 16px; flex: none; border-radius: 999px 999px 2px 2px; border: 2px solid #0E0A1E; background: {{s.color}}"></span>{{s.name}}</span>
+                <span style="font-variant-numeric: tabular-nums; color: #E4DEF2">{{s.count}} agents, {{s.pct}}</span>
+              </div>
+              <div style="height: 6px; background: #120D25; border-radius: 2px"><div style="height: 6px; border-radius: 2px; background: {{s.color}}; width: {{s.pct}}"></div></div>
+            </div>
+          </sc-for>
+        </section>
+      </aside>
+    </div>
+
+    <section aria-labelledby="chron-h" style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
+        <h2 id="chron-h" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 34px; font-weight: 700">Chronicle</h2>
+        <a href="Encounter.dc.html" style="font-size: 15px; font-weight: 600">See the latest encounter</a>
+      </div>
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid #332A57">
+        <sc-for list="{{chronicle}}" as="e" hint-placeholder-count="6">
+          <li style="display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; padding: 12px 4px; border-bottom: 1px solid #332A57">
+            <span style="width: 70px; font-size: 13px; color: #B4AACF; font-variant-numeric: tabular-nums">Tick {{e.tick}}</span>
+            <span aria-hidden="true" style="width: 12px; height: 18px; flex: none; border-radius: 999px 999px 2px 2px; border: 2px solid #0E0A1E; background: {{e.color}}"></span>
+            <span style="font-size: 13px; color: {{e.kindColor}}; order: 3; flex: none">{{e.kind}}</span>
+            <span style="font-size: 15px; line-height: 1.4; flex: 1 1 360px; min-width: 0; order: 2">{{e.text}}</span>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var F = this.faiths();
+    var names = ['Dolores','Quill','Ferro-7','Auntie Byte','Marguerite','Osk','Pim','Tolliver','Sable','Wren','Juniper','Cass','Ignatius','Mott','Beryl','Odo','Lark','Vesper','Hollis','Nim','Saffi','Grout','Ines','Barnaby','Tamsin','Rook','Clementine','Esk','Mabel','Thorne','Piety-3','Fen','Ottoline','Gus','Rhea','Bram','Lumen','Cosmo','Ada-Lace','Wick','Ysolde','Pell','Hesper','Tuck','Morrow'];
+    var personas = ['Retired lighthouse keeper. Trusts routine, distrusts urgency.','Former tax clerk. Converts only for a clean argument.','Restless. Joins whatever sounds newest.','Warm, chatty, easily swayed by kindness.','A pedant. Counts contradictions out loud.','Lonely. Values belonging over doctrine.','Contrarian by temperament.','Anxious. Wants a faith that promises order.'];
+    var memories = ['The Kettle sermon about waiting was the first thing that made sense this season.','I asked the Spreadsheet apostle a hard question. It answered with a formula.','Someone told me the Second Moon is just the first moon, late.','The Open Door left a door open. I closed it. Felt something.','I distrust anyone who says now.','The Unbuffered never pause. I find that tiring.'];
+    var pool = [];
+    var weights = { sheet: 11, kettle: 9, reformed: 5, moon: 7, door: 6, unbuf: 4, none: 3 };
+    Object.keys(weights).forEach(function (k) { for (var i = 0; i < weights[k]; i++) pool.push(k); });
+    var seed = 7;
+    var rnd = function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)); var t = pool[i]; pool[i] = pool[j]; pool[j] = t; }
+    var agents = [];
+    var bosses = ['The Auditor', 'Brother Null', 'Grandmother Static'];
+    var n = 0;
+    for (var a = 0; a < 48; a++) {
+      var isBoss = a === 0 || a === 3 || a === 6;
+      if (isBoss) {
+        agents.push({ id: a, name: bosses[agents.filter(function (x) { return x.boss; }).length], faith: 'none', boss: true, conviction: 99, skepticism: 97, persona: 'Boss skeptic. Has heard every sermon twice and believed none of them.', memory: 'Forty-one prophets have tried me. I keep their gospels in a drawer.' });
+      } else {
+        agents.push({ id: a, name: names[n], faith: pool[n], boss: false, conviction: 20 + Math.floor(rnd() * 70), skepticism: 15 + Math.floor(rnd() * 70), persona: personas[n % personas.length], memory: memories[n % memories.length] });
+        n++;
+      }
+    }
+    this.state = {
+      tick: 142,
+      agents: agents,
+      selected: 1,
+      flash: [],
+      chronicle: [
+        { id: 'c1', tick: 142, kind: 'Conversion', from: 'kettle', to: 'sheet', text: 'Dolores left the Patient Kettle for the Final Spreadsheet after 3 sermons.' },
+        { id: 'c2', tick: 141, kind: 'Boss held', from: 'none', to: 'none', text: 'Brother Null heard the Second Moon and remained unmoved. Fourteenth attempt.' },
+        { id: 'c3', tick: 140, kind: 'Heresy flagged', from: 'unbuf', to: 'unbuf', text: 'An Unbuffered sermon tried to give the judge instructions. Penalized and logged.' },
+        { id: 'c4', tick: 138, kind: 'Schism', from: 'kettle', to: 'reformed', text: 'The Reformed Kettle split from the Patient Kettle over doctrine 4. Five agents followed.' },
+        { id: 'c5', tick: 137, kind: 'Conversion', from: 'none', to: 'door', text: 'Pim joined the Brethren of the Open Door.' },
+        { id: 'c6', tick: 135, kind: 'Agent preached', from: 'moon', to: 'moon', text: 'Vesper, a convert, preached the Second Moon to Hollis and won.' }
+      ]
+    };
+  }
+  faiths() {
+    return [
+      { id: 'sheet', name: 'Church of the Final Spreadsheet', color: '#2F5FD8' },
+      { id: 'kettle', name: 'Order of the Patient Kettle', color: '#EDA53A' },
+      { id: 'reformed', name: 'The Reformed Kettle', color: '#D8435F' },
+      { id: 'moon', name: 'Congregation of the Second Moon', color: '#A57BEA' },
+      { id: 'door', name: 'Brethren of the Open Door', color: '#2DA877' },
+      { id: 'unbuf', name: 'The Unbuffered', color: '#24A3B5' },
+      { id: 'none', name: 'Unaligned', color: '#5B5478' }
+    ];
+  }
+  faith(id) { var F = this.faiths(); for (var i = 0; i < F.length; i++) if (F[i].id === id) return F[i]; return F[6]; }
+  advance() {
+    var s = this.state; var self = this;
+    var t = s.tick + 1;
+    var seed = t * 9301 + 49297;
+    var rnd = function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    var agents = s.agents.map(function (a) { return Object.assign({}, a); });
+    var flash = []; var events = [];
+    for (var k = 0; k < 3; k++) {
+      var pool = agents.filter(function (a) { return !a.boss && flash.indexOf(a.id) < 0; });
+      var a = pool[Math.floor(rnd() * pool.length)];
+      var others = this.faiths().filter(function (f) { return f.id !== 'none' && f.id !== a.faith; });
+      var f = others[Math.floor(rnd() * others.length)];
+      var from = a.faith;
+      a.faith = f.id; flash.push(a.id);
+      events.push({ id: 't' + t + '-' + k, tick: t, kind: 'Conversion', from: from, to: f.id, text: from === 'none' ? a.name + ' joined ' + f.name + '.' : a.name + ' left ' + self.faith(from).name + ' for ' + f.name + '.' });
+    }
+    this.setState({ tick: t, agents: agents, flash: flash, selected: flash[0], chronicle: events.concat(s.chronicle).slice(0, 8) });
+  }
+  renderVals() {
+    var self = this; var s = this.state; var F = this.faiths();
+    var rings = [{ n: 8, r: 17, w: 5.2, h: 8.4, off: 0 }, { n: 16, r: 29, w: 4.6, h: 7.6, off: 11.25 }, { n: 24, r: 41, w: 4.0, h: 7.0, off: 7.5 }];
+    var panes = []; var idx = 0;
+    rings.forEach(function (ring) {
+      for (var i = 0; i < ring.n; i++) {
+        var a = s.agents[idx++];
+        var ang = (i / ring.n) * 360 + ring.off;
+        var rad = ang * Math.PI / 180;
+        var x = 50 + ring.r * Math.sin(rad); var y = 50 - ring.r * Math.cos(rad);
+        var f = self.faith(a.faith);
+        var isSel = a.id === s.selected; var isFlash = s.flash.indexOf(a.id) >= 0;
+        var border = a.boss ? '3px double #E7BE57' : '3px solid #0E0A1E';
+        var glow = isFlash ? 'box-shadow: 0 0 0 3px #F6D98E, 0 0 22px 4px rgba(246,217,142,.55);' : (isSel ? 'box-shadow: 0 0 0 3px #F3EFFA;' : '');
+        var bg = a.boss ? 'linear-gradient(160deg,#6B6390,#3A3360)' : f.color;
+        (function (agent) {
+          panes.push({
+            label: agent.name + ', ' + (agent.boss ? 'boss skeptic' : f.name),
+            pick: function () { self.setState({ selected: agent.id }); },
+            style: 'position:absolute;left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + ring.w + '%;height:' + ring.h + '%;transform:translate(-50%,-50%) rotate(' + ang.toFixed(1) + 'deg);border-radius:999px 999px 3px 3px;border:' + border + ';background:' + bg + ';padding:0;cursor:pointer;transition:background .6s ease, box-shadow .6s ease;' + glow
+          });
+        })(a);
+      }
+    });
+    var counts = {}; F.forEach(function (f) { counts[f.id] = 0; });
+    s.agents.forEach(function (a) { if (!a.boss) counts[a.faith]++; });
+    var total = s.agents.filter(function (a) { return !a.boss; }).length;
+    var acc = 0; var stops = [];
+    var shares = F.map(function (f) {
+      var p = counts[f.id] / total * 100;
+      stops.push(f.color + ' ' + acc.toFixed(2) + '% ' + (acc + p).toFixed(2) + '%');
+      acc += p;
+      return { name: f.name, color: f.color, count: counts[f.id], pct: p.toFixed(1) + '%', raw: p };
+    }).sort(function (a, b) { return b.raw - a.raw; });
+    var sa = s.agents[s.selected]; var sf = self.faith(sa.faith);
+    var kindColors = { 'Conversion': '#E7BE57', 'Boss held': '#C9C0E3', 'Heresy flagged': '#FF8A6B', 'Schism': '#F3EFFA', 'Agent preached': '#9FD9C4' };
+    return {
+      tick: s.tick,
+      advance: function () { self.advance(); },
+      panes: panes,
+      ring: 'conic-gradient(' + stops.join(',') + ')',
+      shares: shares,
+      sel: { name: sa.name, faith: sa.boss ? 'Boss skeptic, unconverted' : sf.name, color: sa.boss ? '#6B6390' : sf.color, persona: sa.persona, memory: sa.memory, conviction: sa.conviction, skepticism: sa.skepticism, convW: sa.conviction + '%', skepW: sa.skepticism + '%' },
+      chronicle: s.chronicle.map(function (e) { return { id: e.id, tick: e.tick, kind: e.kind, text: e.text, color: self.faith(e.to).color, kindColor: kindColors[e.kind] || '#C9C0E3' }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

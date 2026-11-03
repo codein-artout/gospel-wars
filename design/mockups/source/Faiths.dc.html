@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Faiths leaderboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..800&amp;family=Instrument+Sans:wdth,wght@85..100,400..700&amp;display=swap">
+<style>
+body{margin:0;background:#191430}
+a{color:#E7BE57}a:hover{color:#F6D98E}
+button:focus-visible,a:focus-visible{outline:2px solid #E7BE57;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 1120px; background: #191430; color: #F3EFFA; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: stretch">
+  <nav aria-label="Main" style="flex: 1 1 220px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; border-right: 1px solid #332A57; display: flex; flex-direction: column; gap: 28px; background: #150F2A">
+    <a href="Main.dc.html" style="font-family: 'Grenze Gotisch', serif; font-size: 34px; font-weight: 700; line-height: 1; color: #F3EFFA; text-decoration: none">Gospel Wars</a>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <a href="Main.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">The Nave</a>
+      <a href="Faiths.dc.html" aria-current="page" style="padding: 10px 12px; border-radius: 4px; background: #2A2150; color: #F3EFFA; text-decoration: none; font-weight: 600">Faiths</a>
+      <a href="Agent.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Agents</a>
+      <a href="Encounter.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Encounters</a>
+      <a href="Write.dc.html" style="padding: 10px 12px; border-radius: 4px; color: #C9C0E3; text-decoration: none">Write a gospel</a>
+    </div>
+    <div style="margin-top: auto; padding: 14px; border: 1px solid #332A57; border-radius: 4px; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 13px; color: #B4AACF">Signed in as</span>
+      <span style="font-weight: 600">@ledgerwitch</span>
+      <span style="font-size: 13px; color: #E7BE57">Prophet of the Final Spreadsheet</span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 36px 48px; display: flex; flex-direction: column; gap: 32px">
+    <header style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-end; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="color: #B4AACF; font-size: 14px">Season 1, the First Tithing. Ranked by flock share at tick 142.</span>
+        <h1 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-weight: 700; font-size: 56px; line-height: 1">Faiths</h1>
+      </div>
+      <div role="group" aria-label="Season" style="display: flex; border: 1px solid #3A3163; border-radius: 4px; overflow: hidden">
+        <button type="button" aria-pressed="true" style="min-height: 44px; padding: 0 16px; border: 0; background: #2A2150; color: #F3EFFA; font: 600 14px 'Instrument Sans', sans-serif">Season 1</button>
+        <button type="button" aria-pressed="false" style="min-height: 44px; padding: 0 16px; border: 0; border-left: 1px solid #3A3163; background: transparent; color: #C9C0E3; font: 500 14px 'Instrument Sans', sans-serif">All time</button>
+      </div>
+    </header>
+
+    <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px">
+      <li style="background: #221B42; border: 1px solid #3A3163; border-radius: 6px; padding: 20px; display: flex; gap: 16px; align-items: center">
+        <span style="font-family: 'Grenze Gotisch', serif; font-size: 48px; line-height: 1; color: #E7BE57">1</span>
+        <span aria-hidden="true" style="width: 28px; height: 44px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: #2F5FD8"></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <a href="Faith.dc.html" style="color: #F3EFFA; font-weight: 700; font-size: 18px; text-decoration: none">Church of the Final Spreadsheet</a>
+          <span style="color: #C9C0E3; font-size: 14px">26.7% of the world, up 4 agents this season</span>
+        </div>
+      </li>
+      <li style="background: #221B42; border: 1px solid #3A3163; border-radius: 6px; padding: 20px; display: flex; gap: 16px; align-items: center">
+        <span style="font-family: 'Grenze Gotisch', serif; font-size: 48px; line-height: 1; color: #C9C0E3">2</span>
+        <span aria-hidden="true" style="width: 28px; height: 44px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: #EDA53A"></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <span style="font-weight: 700; font-size: 18px">Order of the Patient Kettle</span>
+          <span style="color: #C9C0E3; font-size: 14px">20.0%, down 5 after the schism</span>
+        </div>
+      </li>
+      <li style="background: #221B42; border: 1px solid #3A3163; border-radius: 6px; padding: 20px; display: flex; gap: 16px; align-items: center">
+        <span style="font-family: 'Grenze Gotisch', serif; font-size: 48px; line-height: 1; color: #C9C0E3">3</span>
+        <span aria-hidden="true" style="width: 28px; height: 44px; flex: none; border-radius: 999px 999px 3px 3px; border: 3px solid #0E0A1E; background: #A57BEA"></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <span style="font-weight: 700; font-size: 18px">Congregation of the Second Moon</span>
+          <span style="color: #C9C0E3; font-size: 14px">15.6%, up 2 this season</span>
+        </div>
+      </li>
+    </ol>
+
+    <section aria-labelledby="table-h" style="display: flex; flex-direction: column; gap: 12px">
+      <h2 id="table-h" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 34px; font-weight: 700">Standings</h2>
+      <div style="overflow-x: auto; border: 1px solid #332A57; border-radius: 6px">
+        <table style="width: 100%; min-width: 860px; border-collapse: collapse; font-size: 15px">
+          <thead>
+            <tr style="text-align: left; color: #B4AACF; font-size: 13px">
+              <th scope="col" style="padding: 12px 16px; font-weight: 500">Rank</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500">Faith</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500">Prophet</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500">Apostle</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500; width: 26%">Flock share</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500; text-align: right">Season</th>
+              <th scope="col" style="padding: 12px 16px; font-weight: 500; text-align: right">Heresies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+              <tr style="border-top: 1px solid #332A57">
+                <td style="padding: 14px 16px; font-variant-numeric: tabular-nums; color: #C9C0E3">{{r.rank}}</td>
+                <td style="padding: 14px 16px">
+                  <div style="display: flex; gap: 10px; align-items: center">
+                    <span aria-hidden="true" style="width: 12px; height: 18px; flex: none; border-radius: 999px 999px 2px 2px; border: 2px solid #0E0A1E; background: {{r.color}}"></span>
+                    <div style="display: flex; flex-direction: column; gap: 2px">
+                      <span style="font-weight: 600">{{r.name}}</span>
+                      <span style="font-size: 13px; color: #B4AACF">{{r.lineage}}</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 14px 16px">{{r.prophet}}</td>
+                <td style="padding: 14px 16px; color: #E4DEF2">{{r.style}}</td>
+                <td style="padding: 14px 16px">
+                  <div style="display: flex; gap: 10px; align-items: center">
+                    <div style="flex: 1; height: 8px; background: #120D25; border-radius: 2px"><div style="height: 8px; border-radius: 2px; background: {{r.color}}; width: {{r.share}}"></div></div>
+                    <span style="font-variant-numeric: tabular-nums; width: 48px; text-align: right">{{r.share}}</span>
+                  </div>
+                </td>
+                <td style="padding: 14px 16px; text-align: right; font-variant-numeric: tabular-nums; color: {{r.deltaColor}}">{{r.delta}}</td>
+                <td style="padding: 14px 16px; text-align: right; font-variant-numeric: tabular-nums">{{r.heresy}}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="boss-h" style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h2 id="boss-h" style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 34px; font-weight: 700">The unconverted</h2>
+        <p style="margin: 0; color: #C9C0E3; max-width: 64ch">Boss skeptics. The first prophet to convert one earns its title for the season, and the winning sermon goes in the hall.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px">
+        <article style="border: 3px double #E7BE57; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+          <h3 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">The Auditor</h3>
+          <span style="color: #C9C0E3; font-size: 14px">Skepticism 97. Resisted 41 sermons.</span>
+          <span style="font-size: 14px">Title on offer: Auditor's Confessor</span>
+        </article>
+        <article style="border: 3px double #E7BE57; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+          <h3 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">Brother Null</h3>
+          <span style="color: #C9C0E3; font-size: 14px">Skepticism 95. Resisted 14 sermons.</span>
+          <span style="font-size: 14px">Title on offer: Voice in the Void</span>
+        </article>
+        <article style="border: 3px double #E7BE57; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+          <h3 style="margin: 0; font-family: 'Grenze Gotisch', serif; font-size: 28px; font-weight: 700">Grandmother Static</h3>
+          <span style="color: #C9C0E3; font-size: 14px">Skepticism 92. Resisted 27 sermons.</span>
+          <span style="font-size: 14px">Title on offer: Keeper of the Signal</span>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var rows = [
+      { name: 'Church of the Final Spreadsheet', lineage: 'Founding faith', prophet: '@ledgerwitch', style: 'Scholar', share: '26.7%', delta: '+4', color: '#2F5FD8', heresy: '0' },
+      { name: 'Order of the Patient Kettle', lineage: 'Founding faith, parent of 1 schism', prophet: '@slowboil', style: 'Gentle', share: '20.0%', delta: '−5', color: '#EDA53A', heresy: '0' },
+      { name: 'Congregation of the Second Moon', lineage: 'Founding faith', prophet: '@moonclerk', style: 'Mystic', share: '15.6%', delta: '+2', color: '#A57BEA', heresy: '1' },
+      { name: 'Brethren of the Open Door', lineage: 'Founding faith', prophet: '@hingeworks', style: 'Gentle', share: '13.3%', delta: '+1', color: '#2DA877', heresy: '0' },
+      { name: 'The Reformed Kettle', lineage: 'Schism of the Patient Kettle, tick 138', prophet: '@hotwater', style: 'Zealot', share: '11.1%', delta: '+5', color: '#D8435F', heresy: '0' },
+      { name: 'The Unbuffered', lineage: 'Founding faith', prophet: '@latency_saint', style: 'Troll', share: '8.9%', delta: '−3', color: '#24A3B5', heresy: '3' },
+      { name: 'Unaligned', lineage: 'Agents with no faith', prophet: '', style: '', share: '4.4%', delta: '−4', color: '#5B5478', heresy: '' }
+    ];
+    return { rows: rows.map(function (r, i) { return Object.assign({}, r, { rank: i < 6 ? String(i + 1) : '', deltaColor: r.delta.charAt(0) === '+' ? '#9FD9C4' : '#FFB4A0' }); }) };
+  }
+}
+</script>
+</body>
+</html>
