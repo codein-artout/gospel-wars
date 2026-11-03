@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M7 Heresy and moderation**
+Current milestone: **M8 LLM layer**
 
 ## Plan
 
@@ -12,7 +12,7 @@ Current milestone: **M7 Heresy and moderation**
 | 4 | Shared components with states, RoseWindow geometry + LeaningBar tests | done |
 | 5 | Data model (Prisma), migrations on Postgres and PGlite | done |
 | 6 | Rules engine (`lib/game`), exhaustive + property tests | done |
-| 7 | Heresy linter, fencing, moderation, injection fixtures | todo |
+| 7 | Heresy linter, fencing, moderation, injection fixtures | done |
 | 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | todo |
 | 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | todo |
 | 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | todo |

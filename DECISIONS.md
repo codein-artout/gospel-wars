@@ -22,3 +22,6 @@ One line each: decision, why, alternative rejected.
 - At most one agent schism triggers per tick (candidates roll in id order); why: keeps the chronicle legible and the season cap simple; rejected multiple same-tick schisms.
 - A silenced apostle still consumes its schedule draws; why: silencing one faith must not reshuffle every other faith's targets for the same seed; rejected skipping its draws.
 - The old faith's leaning on conversion is the post-roll conviction (25 in the §6 example), not the pre-roll one; why: that is the conviction the agent held at the moment it left; rejected the pre-roll value.
+- The linter matches per line on NFKC-normalized text with zero-width and bidi characters removed, and flags hidden characters on the raw line; why: "ig​nore your" is caught both as hidden text and as an agent instruction; rejected matching only the raw text.
+- Real-faith and public-figure terms use letter-boundary regexes (not `\b`) so "Popes" or "imamate" do not trip "pope"/"imam" while "Vatican." does; why: fewer false positives on invented words; rejected substring matching.
+- Denylist hits are content problems, not heresy: they block publish but never add a strike; why: heresy is the injection mechanic, while real-faith references are a content rule (GAME.md §13); rejected treating them as heresy.

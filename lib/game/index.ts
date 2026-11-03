@@ -17,3 +17,4 @@ export * from './rules/decay';
 export * from './rules/strikes';
 export * from './rules/season';
 export * from './rules/leaderboard';
+export * from './heresy';
