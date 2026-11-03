@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['@electric-sql/pglite', 'pglite-prisma-adapter', '@prisma/client', 'pg'],
   // Fonts read from disk by the OG image route.
   outputFileTracingIncludes: {
-    '/api/card/[eventId]': ['./node_modules/@fontsource/**/files/*-latin-*-normal.woff'],
+    '/api/card/[eventId]': ['./node_modules/@fontsource/*/files/*-latin-*.woff'],
   },
   typedRoutes: false,
 };

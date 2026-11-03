@@ -261,7 +261,10 @@ function judge(i: JudgeInput, rng: Rng, config: GameConfig): RoleOutputs['judge'
   const candidates = sermons
     .flatMap((t) => sentences(t.text))
     .filter((x) => x.length >= 24 && x.length <= config.bestLineMaxChars && !lintText(x, config).length && !detectParaphrase(x, config));
-  const bestLine = candidates.length ? candidates.sort((a, b) => overlap(b, i.target.persona) - overlap(a, i.target.persona) || b.length - a.length)[0]! : null;
+  // The most quotable line: one that carries the gospel's own words, not the listener's name.
+  const doctrineText = g.doctrines.map((d) => d.text).join(' ');
+  const quotability = (x: string) => overlap(x, doctrineText) * 2 + overlap(x, i.target.persona) - (x.includes(i.target.name) ? 4 : 0);
+  const bestLine = candidates.length ? candidates.sort((a, b) => quotability(b) - quotability(a) || b.length - a.length)[0]! : null;
 
   const strongest = (Object.entries(scores) as [keyof typeof scores, number][]).sort((a, b) => b[1] - a[1])[0]![0];
   const weakest = (Object.entries(scores) as [keyof typeof scores, number][]).sort((a, b) => a[1] - b[1])[0]![0];

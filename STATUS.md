@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M17 Cards, posts and admin**
+Current milestone: **M18 Phone and polish**
 
 ## Plan
 
@@ -22,7 +22,7 @@ Current milestone: **M17 Cards, posts and admin**
 | 14 | Faith page `/f/[slug]` | done |
 | 15 | Write, edit, fork | done |
 | 16 | Encounters and agents | done |
-| 17 | Cards, posts, admin | todo |
+| 17 | Cards, posts, admin | done |
 | 18 | Phone and polish | todo |
 | 19 | E2E, axe, visual review | todo |
 | 20 | Ship-ready docs, clean-room verify | todo |
