@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M6 Rules engine**
+Current milestone: **M7 Heresy and moderation**
 
 ## Plan
 
@@ -11,7 +11,7 @@ Current milestone: **M6 Rules engine**
 | 3 | Tokens, fonts, AppShell, `/dev/components` | done |
 | 4 | Shared components with states, RoseWindow geometry + LeaningBar tests | done |
 | 5 | Data model (Prisma), migrations on Postgres and PGlite | done |
-| 6 | Rules engine (`lib/game`), exhaustive + property tests | todo |
+| 6 | Rules engine (`lib/game`), exhaustive + property tests | done |
 | 7 | Heresy linter, fencing, moderation, injection fixtures | todo |
 | 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | todo |
 | 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | todo |
@@ -34,4 +34,3 @@ See `CLAUDE.md`.
 ## Known gaps
 
 None yet.
-- **Push blocked**: `git push` returns 403 (the Claude GitHub App has no access to `codein-artout/gospel-wars`). Commits are made locally per milestone; reconnect GitHub at https://claude.ai/connect-github (or install the Claude GitHub App on the repo), then run `git push -u origin claude/funny-babbage-t9d5i1`.

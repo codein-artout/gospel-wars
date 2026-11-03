@@ -17,3 +17,8 @@ One line each: decision, why, alternative rejected.
 - Integration tests use a fresh in-memory PGlite per test file with the real migration SQL applied; why: isolated, fast, zero services, and they exercise the same migrations as production; rejected a shared on-disk test database.
 - A unit test parses the migration SQL and fails if any foreign key is not the leading column of an index, primary key or unique constraint; why: "indexes on every foreign key" is enforced, not hoped for; rejected manual review.
 - `GospelDraft.faithKey` is an empty string for new gospels instead of NULL; why: Postgres treats NULLs as distinct, which would break the one-draft-per-user unique key; rejected a partial unique index (not expressible in Prisma).
+- S, R, noise, social, style modifier and pull are rounded to 9 decimals inside the roll; why: 0.25+0.2+0.25+0.075+0.075 evaluates to 0.8499999…, which would make a 0.85 sermon fail `bossMinScore`; rejected epsilon comparisons scattered through the rules.
+- Fork change ratio is max(added, removed) over the larger count of non-blank lines; why: blank-line padding cannot fake a schism; rejected counting raw lines.
+- At most one agent schism triggers per tick (candidates roll in id order); why: keeps the chronicle legible and the season cap simple; rejected multiple same-tick schisms.
+- A silenced apostle still consumes its schedule draws; why: silencing one faith must not reshuffle every other faith's targets for the same seed; rejected skipping its draws.
+- The old faith's leaning on conversion is the post-roll conviction (25 in the §6 example), not the pre-roll one; why: that is the conviction the agent held at the moment it left; rejected the pre-roll value.
