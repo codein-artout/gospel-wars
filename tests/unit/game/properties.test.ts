@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'vitest';
 import {
   applyEncounterToTarget,
   DEFAULT_CONFIG as C,

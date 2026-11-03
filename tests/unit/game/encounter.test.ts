@@ -25,7 +25,8 @@ const NEUTRAL = { openness: 50, loyalty: 50, pedantry: 50, sociability: 50, skep
 /** noiseUnit that yields exactly zero noise. */
 const ZERO = 0.5;
 
-function input(over: Partial<RollInput> & { target?: Partial<RollInput['target']>; preacher?: Partial<RollInput['preacher']> } = {}): RollInput {
+type InputOverrides = Omit<Partial<RollInput>, 'target' | 'preacher'> & { target?: Partial<RollInput['target']>; preacher?: Partial<RollInput['preacher']> };
+function input(over: InputOverrides = {}): RollInput {
   return {
     scores: over.scores ?? scores(2, 2, 2, 2, 2),
     heresy: over.heresy ?? false,
