@@ -91,6 +91,8 @@ body {
 
 a {
   color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 a:hover {
   color: var(--gold-bright);
@@ -367,6 +369,9 @@ a:hover {
     font-size: 18px;
   }
   @media (max-width: 767px) {
+    .scripture .disputed-note {
+      display: none;
+    }
     .scripture .gospel-title {
       font-size: 30px;
     }

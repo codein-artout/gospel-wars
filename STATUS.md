@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M14 Faith page**
+Current milestone: **M15 Write, edit, fork**
 
 ## Plan
 
@@ -19,7 +19,7 @@ Current milestone: **M14 Faith page**
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | done |
 | 12 | The Nave `/` | done |
 | 13 | Faiths `/faiths`, seasons `/seasons/[n]` | done |
-| 14 | Faith page `/f/[slug]` | todo |
+| 14 | Faith page `/f/[slug]` | done |
 | 15 | Write, edit, fork | todo |
 | 16 | Encounters and agents | todo |
 | 17 | Cards, posts, admin | todo |
