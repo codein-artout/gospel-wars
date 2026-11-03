@@ -4,7 +4,7 @@ import path from 'node:path';
 
 /** Directory PGlite stores data in when DATABASE_URL is unset. */
 export function pgliteDir(): string {
-  return path.resolve(process.cwd(), process.env.PGLITE_DIR || '.pglite');
+  return path.resolve(/* turbopackIgnore: true */ process.cwd(), process.env.PGLITE_DIR || '.pglite');
 }
 
 function lockPath(dir: string): string {
