@@ -214,6 +214,7 @@ export const GameConfigSchema = z.object({
   // §16 LLM
   llmModels: z.record(LlmRole, z.string().min(1)),
   llmMaxTokens: z.record(LlmRole, posInt),
+  llmEffort: z.record(LlmRole, z.enum(['low', 'medium', 'high'])),
 
   // Palette (DESIGN.md): one glass color per active faith.
   glassPalette: z.array(GlassColor).min(1),
@@ -491,7 +492,8 @@ export const DEFAULT_CONFIG: GameConfig = {
     post: 'claude-haiku-5-5',
     moderation: 'claude-haiku-5-5',
   },
-  llmMaxTokens: { sermon: 400, reply: 300, judge: 600, memory: 200, amendment: 500, post: 200, moderation: 200 },
+  llmMaxTokens: { sermon: 2000, reply: 1500, judge: 3000, memory: 1000, amendment: 2000, post: 1000, moderation: 1000 },
+  llmEffort: { sermon: 'medium', reply: 'low', judge: 'medium', memory: 'low', amendment: 'medium', post: 'low', moderation: 'low' },
 
   glassPalette: [
     { name: 'Cobalt', hex: '#2F5FD8' },

@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M8 LLM layer**
+Current milestone: **M9 Tick engine**
 
 ## Plan
 
@@ -13,7 +13,7 @@ Current milestone: **M8 LLM layer**
 | 5 | Data model (Prisma), migrations on Postgres and PGlite | done |
 | 6 | Rules engine (`lib/game`), exhaustive + property tests | done |
 | 7 | Heresy linter, fencing, moderation, injection fixtures | done |
-| 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | todo |
+| 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | done |
 | 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | todo |
 | 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | todo |
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | todo |

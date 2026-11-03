@@ -49,3 +49,15 @@ export function trusted(value: TrustedScalar): string {
   }
   return String(value);
 }
+
+/** Fences each item of a list (memories) and joins them; an empty list becomes a fenced "(none)". */
+export function fenceList(label: string, items: readonly string[]): string {
+  if (items.length === 0) return fenceUntrusted(label, '(none)');
+  return items.map((item) => fenceUntrusted(label, item)).join('\n');
+}
+
+/** Fences an exchange transcript turn by turn. */
+export function fenceExchange(turns: readonly { role: 'sermon' | 'reply'; speaker: string; text: string }[]): string {
+  if (turns.length === 0) return fenceUntrusted('exchange', '(no turns yet)');
+  return turns.map((t) => fenceUntrusted(t.role === 'sermon' ? 'sermon' : 'reply', `${t.speaker}: ${t.text}`)).join('\n');
+}
