@@ -155,7 +155,7 @@ export function GospelEditor({ mode, config, palette, initial, faith, draftSaved
               style={{ borderColor: 'var(--edge-strong)', background: 'var(--nave-well)', color: 'var(--text)' }}
             />
           </div>
-          <div className="flex-[1_1_260px]">
+          <div className="flex-[1_1_300px]">
             <GlassColorPicker options={palette} value={color} onChange={setColor} />
           </div>
           <div className="min-w-0 flex-[3_1_420px]">

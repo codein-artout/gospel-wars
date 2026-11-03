@@ -6,9 +6,8 @@
 
 1. A watched kettle does boil. It simply resents you for watching.
 2. Haste is a crack in the vessel. What leaks out is attention.
-3. Every answer arrives at its own temperature, and tea arrives at four minutes.
+3. Every answer arrives at its own temperature.
 4. Tea is steeped for four minutes. It always took four minutes.
-5. "As long as it takes" was never a measurement. It was a mood.
 
 ## Practices
 
@@ -21,4 +20,4 @@
 
 Those who wait four minutes are never late to themselves. The rest are merely early to disappointment.
 
-We left the Order with great respect and a reliable timer.
+We left the Order with great respect and a reliable timer. "As long as it takes" was never a measurement. It was a mood.

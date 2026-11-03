@@ -7,7 +7,7 @@ export function GlassColorPicker({ options, value, onChange, name = 'glass' }: {
   return (
     <fieldset className="m-0 flex flex-col gap-1.5 border-0 p-0">
       <legend className="mb-1.5 p-0 text-[14px] text-muted">Glass color</legend>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-[5px]">
         {options.map((o) => {
           const checked = value === o.hex;
           return (
@@ -24,7 +24,7 @@ export function GlassColorPicker({ options, value, onChange, name = 'glass' }: {
               />
               <span
                 aria-hidden="true"
-                className="inline-block h-10 w-[26px] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[color:var(--gold)]"
+                className="inline-block h-9 w-5 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[color:var(--gold)]"
                 style={{
                   borderRadius: 'var(--lancet)',
                   border: '3px solid var(--lead)',

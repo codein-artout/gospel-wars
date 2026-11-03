@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M19 E2E and visual check**
+Current milestone: **M20 Ship-ready**
 
 ## Plan
 
@@ -24,7 +24,7 @@ Current milestone: **M19 E2E and visual check**
 | 16 | Encounters and agents | done |
 | 17 | Cards, posts, admin | done |
 | 18 | Phone and polish | done |
-| 19 | E2E, axe, visual review | todo |
+| 19 | E2E, axe, visual review | done (13 e2e incl. axe on every page; design-review.md resolved) |
 | 20 | Ship-ready docs, clean-room verify | todo |
 
 ## Commands

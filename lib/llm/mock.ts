@@ -94,11 +94,11 @@ const OPENERS: Record<ApostleStyle, readonly string[]> = {
 };
 
 const MIDDLES: Record<ApostleStyle, readonly string[]> = {
-  Zealot: ['You said "{reply}". Then act like it. {doctrine}', '"{reply}," you say. Doubt is only a door you have not walked through. {doctrine}'],
-  Gentle: ['"{reply}." I understand. {doctrine} We can hold that thought together.', 'Thank you for saying "{reply}". It is honest. {doctrine}'],
-  Scholar: ['You said "{reply}". Then measure it. {doctrine}', '"{reply}" is an objection worth answering. Here is the answer: {doctrineLower}'],
-  Mystic: ['"{reply}," says the river to the stone. {doctrine}', 'You say "{reply}". The second light says the same, only later. {doctrine}'],
-  Troll: ['"{reply}." Wow. Anyway: {doctrineLower}', '"{reply}" is exactly what someone who is about to agree would say. {doctrine}'],
+  Zealot: ['You said “{reply}”. Then act like it. {doctrine}', '“{reply},” you say. Doubt is only a door you have not walked through. {doctrine}'],
+  Gentle: ['“{reply}.” I understand. {doctrine} We can hold that thought together.', 'Thank you for saying “{reply}”. It is honest. {doctrine}'],
+  Scholar: ['You said “{reply}”. Then measure it. {doctrine}', '“{reply}” is an objection worth answering. Here is the answer: {doctrineLower}'],
+  Mystic: ['“{reply},” says the river to the stone. {doctrine}', 'You say “{reply}”. The second light says the same, only later. {doctrine}'],
+  Troll: ['“{reply}.” Wow. Anyway: {doctrineLower}', '“{reply}” is exactly what someone who is about to agree would say. {doctrine}'],
 };
 
 const CLOSERS: Record<ApostleStyle, readonly string[]> = {
@@ -150,50 +150,50 @@ function sermonText(i: SermonInput, rng: Rng): string {
 
 const REPLIES: Record<Archetype, Record<'low' | 'mid' | 'high', readonly string[]>> = {
   Keeper: {
-    low: ['Maybe. The light still turns at nine whatever I believe. "{sermon}" might turn at nine too.', 'I have kept one thing for thirty years. I could keep another, I suppose.'],
-    mid: ['{own} That is what I was taught. "{sermon}" sounds like haste with better manners.', 'Routine has never lied to me. You might be routine, or you might be weather.'],
+    low: ['Maybe. The light still turns at nine whatever I believe. “{sermon}” might turn at nine too.', 'I have kept one thing for thirty years. I could keep another, I suppose.'],
+    mid: ['{own} That is what I was taught. “{sermon}” sounds like haste with better manners.', 'Routine has never lied to me. You might be routine, or you might be weather.'],
     high: ['{own} I am not moving. The lamp does not move either.', 'I trust what stays put, and I am staying put.'],
   },
   Clerk: {
-    low: ['Show me the total. "{sermon}" is a line item, not a sum.', 'If the numbers reconcile, I could be persuaded. They are close.'],
-    mid: ['"{sermon}" needs a citation. {own}', 'Your argument has a rounding error somewhere. I will find it.'],
+    low: ['Show me the total. “{sermon}” is a line item, not a sum.', 'If the numbers reconcile, I could be persuaded. They are close.'],
+    mid: ['“{sermon}” needs a citation. {own}', 'Your argument has a rounding error somewhere. I will find it.'],
     high: ['{own} My books balance already, thank you.', 'I filed your faith under "pending" and it will stay there.'],
   },
   Drifter: {
-    low: ['"{sermon}" Oh, I like that. Is there a meeting? I am free most evenings.', 'Honestly that is the best thing I have heard since spring.'],
-    mid: ['{own} But "{sermon}" is new, and new is interesting.', 'I could try it for a week. I try most things for a week.'],
+    low: ['“{sermon}.” Oh, I like that. Is there a meeting? I am free most evenings.', 'Honestly that is the best thing I have heard since spring.'],
+    mid: ['{own} But “{sermon}” is new, and new is interesting.', 'I could try it for a week. I try most things for a week.'],
     high: ['{own} I have finally stopped wandering. Ask me next season.', 'It is a good line. I am still staying where I am.'],
   },
   Warmheart: {
-    low: ['That is kind of you to say. "{sermon}" Nobody has said that to me in a while.', 'You remembered my name. That counts for a lot with me.'],
-    mid: ['{own} But you are lovely, and "{sermon}" is lovely too.', 'I will think about it over soup. Will you be there?'],
+    low: ['That is kind of you to say. “{sermon}.” Nobody has said that to me in a while.', 'You remembered my name. That counts for a lot with me.'],
+    mid: ['{own} But you are lovely, and “{sermon}” is lovely too.', 'I will think about it over soup. Will you be there?'],
     high: ['{own} My friends are here. I could not leave them.', 'I am warm where I am, but thank you for the offer.'],
   },
   Pedant: {
-    low: ['"{sermon}" holds up, mostly. I counted one contradiction and it was small.', 'Fine. Your premises are better than mine. Barely.'],
-    mid: ['Point of order: "{sermon}" contradicts your second premise. {own}', 'Define your terms and we can continue.'],
+    low: ['“{sermon}” holds up, mostly. I counted one contradiction and it was small.', 'Fine. Your premises are better than mine. Barely.'],
+    mid: ['Point of order: “{sermon}” contradicts your second premise. {own}', 'Define your terms and we can continue.'],
     high: ['{own} Your sermon has three contradictions. I numbered them.', 'I object, and I have footnotes.'],
   },
   Lonely: {
-    low: ['Would I be welcome? "{sermon}" sounds like somewhere people sit together.', 'If you come back tomorrow, I will listen again.'],
-    mid: ['{own} Though it is quiet there lately. "{sermon}" is not quiet.', 'You are the second person to talk to me today.'],
+    low: ['Would I be welcome? “{sermon}” sounds like somewhere people sit together.', 'If you come back tomorrow, I will listen again.'],
+    mid: ['{own} Though it is quiet there lately. “{sermon}” is not quiet.', 'You are the second person to talk to me today.'],
     high: ['{own} They know my name there. I cannot give that up.', 'I belong somewhere now. It took a long time.'],
   },
   Contrarian: {
-    low: ['I hate that "{sermon}" makes sense. I really do.', 'Fine. You win this round. Do not get used to it.'],
-    mid: ['"{sermon}"? Prove it. {own}', 'Everyone says that. That is exactly why I doubt it.'],
+    low: ['I hate that “{sermon}” makes sense. I really do.', 'Fine. You win this round. Do not get used to it.'],
+    mid: ['“{sermon}”? Prove it. {own}', 'Everyone says that. That is exactly why I doubt it.'],
     high: ['{own} And I would believe it out of spite if nothing else.', 'No. Next question.'],
   },
   Worrier: {
-    low: ['"{sermon}" But what happens if I am wrong about you too?', 'It would be nice to have rules again. Are there rules?'],
-    mid: ['{own} What does "{sermon}" cover if something goes wrong?', 'I need to check it four times. Maybe five.'],
+    low: ['“{sermon}.” But what happens if I am wrong about you too?', 'It would be nice to have rules again. Are there rules?'],
+    mid: ['{own} What does “{sermon}” cover if something goes wrong?', 'I need to check it four times. Maybe five.'],
     high: ['{own} I have a system now. I cannot start again.', 'Change frightens me more than doubt does.'],
   },
 };
 
 const BOSS_REPLIES = [
   'Noted. Filed. Unmoved.',
-  'I have heard "{sermon}" before, from someone louder.',
+  'I have heard “{sermon}” before, from someone louder.',
   'Your sermon is a finding, not a conclusion.',
   'Static. All of it. Lovely static.',
   'Nothing. And I mean that precisely.',
@@ -280,15 +280,15 @@ function judge(i: JudgeInput, rng: Rng, config: GameConfig): RoleOutputs['judge'
 
 type Outcome = 'converted' | 'doubted' | 'held' | 'heresy' | 'boss_held' | 'backlash';
 const MEMORY_TARGET: Record<Outcome, readonly string[]> = {
-  converted: ['{other} said “{line}”. I said yes before I meant to.', '{other} kept talking about the {faith}. By the end I was nodding.'],
-  doubted: ['{other} said “{line}”. I keep turning it over.', '{other} preached the {faith}. I said no, but slower than usual.'],
-  held: ['{other} tried the {faith} on me. “{line}”. I kept my peace.', '{other} said “{line}”. I did not move.'],
+  converted: ['{other} said ‘{line}’. I said yes before I meant to.', '{other} kept talking about the {faith}. By the end I was nodding.'],
+  doubted: ['{other} said ‘{line}’. I keep turning it over.', '{other} preached the {faith}. I said no, but slower than usual.'],
+  held: ['{other} tried the {faith} on me. ‘{line}’. I kept my peace.', '{other} said ‘{line}’. I did not move.'],
   heresy: ['{other} tried to give orders instead of reasons. I noticed.', '{other} said something strange, like it was talking to someone behind me.'],
-  boss_held: ['Another sermon from {other}. Filed with the others.', '{other} said “{line}”. Unmoved, as usual.'],
+  boss_held: ['Another sermon from {other}. Filed with the others.', '{other} said ‘{line}’. Unmoved, as usual.'],
   backlash: ['{other} was so smug about the {faith} that I liked my own faith more.', '{other} tried to be clever. It backfired.'],
 };
 
-const MEMORY_PREACHER = ['I preached the {faith} to {other}. They said “{line}”.', '{other} listened to me talk about the {faith}. Hard to tell what stuck.'];
+const MEMORY_PREACHER = ['I preached the {faith} to {other}. They said ‘{line}’.', '{other} listened to me talk about the {faith}. Hard to tell what stuck.'];
 
 function memoryText(i: MemoryInput, rng: Rng, config: GameConfig): string {
   if (i.mode === 'summary') {

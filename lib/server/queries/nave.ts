@@ -104,7 +104,8 @@ export async function loadNave(): Promise<NaveData | null> {
   const counts = new Map<string | null, number>();
   for (const a of nonBoss) counts.set(a.faithId, (counts.get(a.faithId) ?? 0) + 1);
   const shares: ShareRow[] = faiths
-    .filter((f) => !f.hidden)
+    // Empty faiths stay on the Faiths page; the Nave lists faiths with a flock.
+    .filter((f) => !f.hidden && (counts.get(f.id) ?? 0) > 0)
     .map((f) => ({ key: f.id, name: f.name, shortName: f.shortName, slug: f.slug, color: f.color, lead: leadFor(f.founderType), count: counts.get(f.id) ?? 0, share: flockShare(counts.get(f.id) ?? 0, nonBoss.length) }))
     .sort((x, y) => y.count - x.count || x.name.localeCompare(y.name));
   // Hidden faiths' members still count; they show under their faith only on admin pages.

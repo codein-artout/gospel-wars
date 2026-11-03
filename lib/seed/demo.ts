@@ -16,7 +16,7 @@ import { AGENT_NAMES, SEED_FAITHS, WORLD } from '@/prisma/seed-data/world';
 
 const TICKS = Number(process.env.SEED_TICKS ?? 140);
 /** The fork happens in a window after forkTick, at the first tick where the schism pull would move enough agents. */
-const FORK_WINDOW = 10;
+const FORK_WINDOW = 7;
 const FORK_MIN_MOVERS = 2;
 
 /** Dry-runs the schism pull the fork would make at the world's current tick (same seed, same ids). */

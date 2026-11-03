@@ -31,5 +31,5 @@ export const SEED_FAITHS: SeedFaithSpec[] = [
   { slug: 'second-moon', name: 'Congregation of the Second Moon', color: '#A57BEA', style: 'Mystic', apostleName: 'Sister Perigee', prophet: { handle: 'moonclerk', email: 'moonclerk@gospelwars.test', name: 'Moon Clerk' }, founding: 7 },
   { slug: 'open-door', name: 'Brethren of the Open Door', color: '#2DA877', style: 'Gentle', apostleName: 'Warden Hinge', prophet: { handle: 'hingeworks', email: 'hingeworks@gospelwars.test', name: 'Hinge Works' }, founding: 5 },
   { slug: 'unbuffered', name: 'The Unbuffered', color: '#24A3B5', style: 'Troll', apostleName: 'Pingback', prophet: { handle: 'latency_saint', email: 'latency_saint@gospelwars.test', name: 'Latency Saint' }, founding: 7 },
-  { slug: 'reformed-kettle', name: 'The Reformed Kettle', color: '#D8435F', style: 'Zealot', apostleName: 'Deacon Boilover', prophet: { handle: 'hotwater', email: 'hotwater@gospelwars.test', name: 'Hot Water' }, founding: 0, forkOf: 'patient-kettle', forkTick: 126 },
+  { slug: 'reformed-kettle', name: 'The Reformed Kettle', color: '#D8435F', style: 'Zealot', apostleName: 'Deacon Boilover', prophet: { handle: 'hotwater', email: 'hotwater@gospelwars.test', name: 'Hot Water' }, founding: 0, forkOf: 'patient-kettle', forkTick: 132 },
 ];
