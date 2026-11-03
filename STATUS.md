@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M15 Write, edit, fork**
+Current milestone: **M16 Encounters and agents**
 
 ## Plan
 
@@ -20,7 +20,7 @@ Current milestone: **M15 Write, edit, fork**
 | 12 | The Nave `/` | done |
 | 13 | Faiths `/faiths`, seasons `/seasons/[n]` | done |
 | 14 | Faith page `/f/[slug]` | done |
-| 15 | Write, edit, fork | todo |
+| 15 | Write, edit, fork | done |
 | 16 | Encounters and agents | todo |
 | 17 | Cards, posts, admin | todo |
 | 18 | Phone and polish | todo |
