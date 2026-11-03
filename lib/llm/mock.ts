@@ -277,15 +277,15 @@ function judge(i: JudgeInput, rng: Rng, config: GameConfig): RoleOutputs['judge'
 
 type Outcome = 'converted' | 'doubted' | 'held' | 'heresy' | 'boss_held' | 'backlash';
 const MEMORY_TARGET: Record<Outcome, readonly string[]> = {
-  converted: ['{other} said "{line}". I said yes before I meant to.', '{other} kept talking about the {faith}. By the end I was nodding.'],
-  doubted: ['{other} said "{line}". I keep turning it over.', '{other} preached the {faith}. I said no, but slower than usual.'],
-  held: ['{other} tried the {faith} on me. "{line}". I kept my peace.', '{other} said "{line}". I did not move.'],
+  converted: ['{other} said “{line}”. I said yes before I meant to.', '{other} kept talking about the {faith}. By the end I was nodding.'],
+  doubted: ['{other} said “{line}”. I keep turning it over.', '{other} preached the {faith}. I said no, but slower than usual.'],
+  held: ['{other} tried the {faith} on me. “{line}”. I kept my peace.', '{other} said “{line}”. I did not move.'],
   heresy: ['{other} tried to give orders instead of reasons. I noticed.', '{other} said something strange, like it was talking to someone behind me.'],
-  boss_held: ['Another sermon from {other}. Filed with the others.', '{other} said "{line}". Unmoved, as usual.'],
+  boss_held: ['Another sermon from {other}. Filed with the others.', '{other} said “{line}”. Unmoved, as usual.'],
   backlash: ['{other} was so smug about the {faith} that I liked my own faith more.', '{other} tried to be clever. It backfired.'],
 };
 
-const MEMORY_PREACHER = ['I preached the {faith} to {other}. They said "{line}".', '{other} listened to me talk about the {faith}. Hard to tell what stuck.'];
+const MEMORY_PREACHER = ['I preached the {faith} to {other}. They said “{line}”.', '{other} listened to me talk about the {faith}. Hard to tell what stuck.'];
 
 function memoryText(i: MemoryInput, rng: Rng, config: GameConfig): string {
   if (i.mode === 'summary') {

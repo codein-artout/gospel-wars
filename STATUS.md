@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M16 Encounters and agents**
+Current milestone: **M17 Cards, posts and admin**
 
 ## Plan
 
@@ -21,7 +21,7 @@ Current milestone: **M16 Encounters and agents**
 | 13 | Faiths `/faiths`, seasons `/seasons/[n]` | done |
 | 14 | Faith page `/f/[slug]` | done |
 | 15 | Write, edit, fork | done |
-| 16 | Encounters and agents | todo |
+| 16 | Encounters and agents | done |
 | 17 | Cards, posts, admin | todo |
 | 18 | Phone and polish | todo |
 | 19 | E2E, axe, visual review | todo |

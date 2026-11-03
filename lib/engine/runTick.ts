@@ -289,7 +289,7 @@ async function planTick(state: WorldState, tick: number, llm: LLMClient, moderat
       social: roll.social,
       pull: roll.pull,
       convictionBefore: roll.convictionBefore,
-      convictionAfter: applied.converted ? roll.convictionAfter : next.conviction,
+      convictionAfter: next.conviction,
       leaningBefore: roll.leaningBefore,
       leaningAfter: roll.leaningAfter,
       converted: applied.converted,
