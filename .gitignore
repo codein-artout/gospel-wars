@@ -1,1 +1,17 @@
 gospel-wars-design.zip
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env.local
+.pglite/
+.pglite-*/
+lib/db/generated/
+test-results/
+playwright-report/
+blob-report/
+coverage/
+.vercel/
+screenshots/

@@ -1,13 +1,13 @@
 # STATUS
 
-Current milestone: **M1 Orient** (in progress)
+Current milestone: **M3 Tokens, fonts and the shell**
 
 ## Plan
 
 | # | Milestone | State |
 |---|---|---|
-| 1 | Orient: specs read, STATUS/DECISIONS/CLAUDE.md | in progress |
-| 2 | Scaffold: Next + TS strict + Tailwind + pnpm, ESLint/Prettier, Vitest, Playwright + axe, scripts, CI | todo |
+| 1 | Orient: specs read, STATUS/DECISIONS/CLAUDE.md | done |
+| 2 | Scaffold: Next + TS strict + Tailwind + pnpm, ESLint/Prettier, Vitest, Playwright + axe, scripts, CI | done |
 | 3 | Tokens, fonts, AppShell, `/dev/components` | todo |
 | 4 | Shared components with states, RoseWindow geometry + LeaningBar tests | todo |
 | 5 | Data model (Prisma), migrations on Postgres and PGlite | todo |
@@ -34,3 +34,4 @@ See `CLAUDE.md`.
 ## Known gaps
 
 None yet.
+- **Push blocked**: `git push` returns 403 (the Claude GitHub App has no access to `codein-artout/gospel-wars`). Commits are made locally per milestone; reconnect GitHub at https://claude.ai/connect-github (or install the Claude GitHub App on the repo), then run `git push -u origin claude/funny-babbage-t9d5i1`.

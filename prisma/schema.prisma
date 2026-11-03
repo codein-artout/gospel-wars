@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/db/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Thing {
+  id   String @id @default(cuid())
+  name String
+  n    Int    @default(0)
+  data Json?
+}

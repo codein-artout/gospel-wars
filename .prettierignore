@@ -1,0 +1,10 @@
+design/
+node_modules/
+.next/
+.pglite*/
+lib/db/generated/
+prisma/migrations/
+pnpm-lock.yaml
+test-results/
+playwright-report/
+tests/fixtures/
