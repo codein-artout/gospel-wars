@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M13 Faiths and seasons**
+Current milestone: **M14 Faith page**
 
 ## Plan
 
@@ -18,7 +18,7 @@ Current milestone: **M13 Faiths and seasons**
 | 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | done (26s, deterministic) |
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | done |
 | 12 | The Nave `/` | done |
-| 13 | Faiths `/faiths`, seasons `/seasons/[n]` | todo |
+| 13 | Faiths `/faiths`, seasons `/seasons/[n]` | done |
 | 14 | Faith page `/f/[slug]` | todo |
 | 15 | Write, edit, fork | todo |
 | 16 | Encounters and agents | todo |

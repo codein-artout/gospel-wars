@@ -13,6 +13,7 @@ export type StandingRow = {
   prophet: string;
   style: string;
   share: number;
+  members?: number;
   delta: number | null;
   heresies: number | null;
   silenced?: boolean;
