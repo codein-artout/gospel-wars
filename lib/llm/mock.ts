@@ -217,7 +217,7 @@ function replyText(i: ReplyInput, rng: Rng): string {
 
 // ---------------------------------------------------------------- judge
 
-const WARMTH_BASE: Record<ApostleStyle, number> = { Gentle: 3, Mystic: 2, Scholar: 2, Zealot: 1, Troll: 1 };
+const WARMTH_BASE: Record<ApostleStyle, number> = { Gentle: 2.4, Mystic: 2.2, Scholar: 2.3, Zealot: 1.9, Troll: 1.7 };
 
 function judge(i: JudgeInput, rng: Rng, config: GameConfig): RoleOutputs['judge'] {
   const sermons = i.exchange.filter((t) => t.role === 'sermon');

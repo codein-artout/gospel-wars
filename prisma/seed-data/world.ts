@@ -26,10 +26,10 @@ export type SeedFaithSpec = {
 };
 
 export const SEED_FAITHS: SeedFaithSpec[] = [
-  { slug: 'final-spreadsheet', name: 'Church of the Final Spreadsheet', color: '#2F5FD8', style: 'Scholar', apostleName: 'Brother Ledger', prophet: { handle: 'ledgerwitch', email: 'ledgerwitch@gospelwars.test', name: 'Ledger Witch' }, founding: 7 },
-  { slug: 'patient-kettle', name: 'Order of the Patient Kettle', color: '#EDA53A', style: 'Gentle', apostleName: 'Brother Simmer', prophet: { handle: 'slowboil', email: 'slowboil@gospelwars.test', name: 'Slow Boil' }, founding: 10 },
-  { slug: 'second-moon', name: 'Congregation of the Second Moon', color: '#A57BEA', style: 'Mystic', apostleName: 'Sister Perigee', prophet: { handle: 'moonclerk', email: 'moonclerk@gospelwars.test', name: 'Moon Clerk' }, founding: 6 },
+  { slug: 'final-spreadsheet', name: 'Church of the Final Spreadsheet', color: '#2F5FD8', style: 'Scholar', apostleName: 'Brother Ledger', prophet: { handle: 'ledgerwitch', email: 'ledgerwitch@gospelwars.test', name: 'Ledger Witch' }, founding: 9 },
+  { slug: 'patient-kettle', name: 'Order of the Patient Kettle', color: '#EDA53A', style: 'Gentle', apostleName: 'Brother Simmer', prophet: { handle: 'slowboil', email: 'slowboil@gospelwars.test', name: 'Slow Boil' }, founding: 8 },
+  { slug: 'second-moon', name: 'Congregation of the Second Moon', color: '#A57BEA', style: 'Mystic', apostleName: 'Sister Perigee', prophet: { handle: 'moonclerk', email: 'moonclerk@gospelwars.test', name: 'Moon Clerk' }, founding: 7 },
   { slug: 'open-door', name: 'Brethren of the Open Door', color: '#2DA877', style: 'Gentle', apostleName: 'Warden Hinge', prophet: { handle: 'hingeworks', email: 'hingeworks@gospelwars.test', name: 'Hinge Works' }, founding: 5 },
   { slug: 'unbuffered', name: 'The Unbuffered', color: '#24A3B5', style: 'Troll', apostleName: 'Pingback', prophet: { handle: 'latency_saint', email: 'latency_saint@gospelwars.test', name: 'Latency Saint' }, founding: 7 },
-  { slug: 'reformed-kettle', name: 'The Reformed Kettle', color: '#D8435F', style: 'Zealot', apostleName: 'Deacon Boilover', prophet: { handle: 'hotwater', email: 'hotwater@gospelwars.test', name: 'Hot Water' }, founding: 0, forkOf: 'patient-kettle', forkTick: 104 },
+  { slug: 'reformed-kettle', name: 'The Reformed Kettle', color: '#D8435F', style: 'Zealot', apostleName: 'Deacon Boilover', prophet: { handle: 'hotwater', email: 'hotwater@gospelwars.test', name: 'Hot Water' }, founding: 0, forkOf: 'patient-kettle', forkTick: 126 },
 ];

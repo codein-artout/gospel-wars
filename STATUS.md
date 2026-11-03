@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M10 Seed**
+Current milestone: **M11 Auth**
 
 ## Plan
 
@@ -15,7 +15,7 @@ Current milestone: **M10 Seed**
 | 7 | Heresy linter, fencing, moderation, injection fixtures | done |
 | 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | done |
 | 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | done (admin button lands with auth in M11/M12) |
-| 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | todo |
+| 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | done (26s, deterministic) |
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | todo |
 | 12 | The Nave `/` | todo |
 | 13 | Faiths `/faiths`, seasons `/seasons/[n]` | todo |
