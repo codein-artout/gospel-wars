@@ -154,6 +154,7 @@ export function lintGospel(text: string, config: GameConfig): GospelLint {
 export function lintFaithName(name: string, config: GameConfig): string[] {
   const out: string[] = [];
   const n = [...name.trim()].length;
+  if (n === 0) return ['Name your faith.'];
   if (n < config.faithNameMinChars || n > config.faithNameMaxChars) {
     out.push(`Faith names are ${config.faithNameMinChars} to ${config.faithNameMaxChars} characters. This one is ${n}.`);
   }

@@ -112,6 +112,7 @@ describe('lintGospel', () => {
 describe('faith names', () => {
   it('enforces length and denylists', () => {
     expect(lintFaithName('Order of the Patient Kettle', C)).toEqual([]);
+    expect(lintFaithName('', C)).toEqual(['Name your faith.']);
     expect(lintFaithName('Ok', C)[0]).toMatch(/3 to 48 characters/);
     expect(lintFaithName('x'.repeat(49), C)[0]).toMatch(/This one is 49/);
     expect(lintFaithName('Church of Jesus Tea', C)).toContain('Gospel Wars is for invented faiths. Remove references to Jesus.');

@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M18 Phone and polish**
+Current milestone: **M19 E2E and visual check**
 
 ## Plan
 
@@ -23,7 +23,7 @@ Current milestone: **M18 Phone and polish**
 | 15 | Write, edit, fork | done |
 | 16 | Encounters and agents | done |
 | 17 | Cards, posts, admin | done |
-| 18 | Phone and polish | todo |
+| 18 | Phone and polish | done |
 | 19 | E2E, axe, visual review | todo |
 | 20 | Ship-ready docs, clean-room verify | todo |
 
