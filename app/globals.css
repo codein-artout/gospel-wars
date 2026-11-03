@@ -1,2 +1,276 @@
 @import 'tailwindcss';
 @config '../tailwind.config.ts';
+
+/* Design tokens from design/DESIGN.md. Components use these variables, never raw hex. */
+:root {
+  --nave: #191430;
+  --nave-deep: #150f2a;
+  --nave-well: #120d25;
+  --panel: #221b42;
+  --panel-2: #2a2150;
+  --panel-3: #241d45; /* reply blocks (mockup) */
+  --panel-memory: #211a40; /* memory entries (mockup) */
+  --hairline: #332a57;
+  --edge: #3a3163;
+  --edge-strong: #4a4170; /* inputs and segmented controls (mockup) */
+  --edge-quiet: #5a4f86; /* quiet button outline (mockup) */
+  --ring-line: #2c2450; /* rose window ring guides (mockup) */
+  --lead: #0e0a1e;
+  --text: #f3effa;
+  --text-2: #e4def2;
+  --muted: #c9c0e3;
+  --faint: #b4aacf;
+  --trait: #c9c0e3;
+  --skepticism-fill: #9c92be;
+  --gold: #e7be57;
+  --gold-bright: #f6d98e;
+  --on-gold: #1c1430;
+  --medallion: #1c1538;
+  --outcome-bg: #2a2246;
+  --disabled-bg: #4a4170;
+  --vellum: #efe6d2;
+  --vellum-rule: #c9bb9c;
+  --vellum-meta: #5a4e72;
+  --vellum-meta-2: #4a3f60;
+  --vellum-button: #8a7c64;
+  --vellum-link: #6a3b12;
+  --disputed-bg: #f7dfa6;
+  --ink: #2a2140;
+  --heresy: #ff6b4a;
+  --heresy-text: #ffb4a0;
+  --heresy-kind: #ff8a6b;
+  --heresy-bg: #2a1621;
+  --heresy-edge: #6b2e24;
+  --heresy-item: #3a1d27;
+  --heresy-body: #f3dcd6;
+  --heresy-foot: #e4c9c2;
+  --grace: #9fd9c4;
+  --grace-bg: #16302b;
+  --grace-edge: #2e6b5a;
+  --grace-body: #d9f2e9;
+  --glass-unaligned: #5b5478;
+  --boss-a: #6b6390;
+  --boss-b: #3a3360;
+  --glow: 0 0 0 3px var(--gold-bright), 0 0 22px 4px rgb(246 217 142 / 0.55);
+
+  --font-display: 'Grenze Gotisch', Georgia, serif;
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+  --font-scripture: 'Spectral', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --lancet: 999px 999px 3px 3px;
+  --lancet-sm: 999px 999px 2px 2px;
+  --arch: 160px 160px 6px 6px;
+  --arch-sm: 120px 120px 6px 6px;
+
+  color-scheme: dark;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --arch: 120px 120px 6px 6px;
+  }
+}
+
+@layer base {
+html {
+  background: var(--nave);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--nave);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--gold);
+}
+a:hover {
+  color: var(--gold-bright);
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-scripture {
+  font-family: var(--font-scripture);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+}
+
+@layer components {
+/* Buttons: primary, secondary, quiet. All at least 44px tall. */
+.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border-radius: 4px;
+  font: 600 15px var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--on-gold);
+  border: 1px solid var(--gold);
+  font-weight: 700;
+}
+.btn-primary:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  color: var(--on-gold);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+.btn-secondary:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+.btn-quiet {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--edge-quiet);
+}
+.btn-quiet:hover {
+  border-color: var(--muted);
+  color: var(--text);
+}
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  background: var(--disabled-bg);
+  border-color: var(--disabled-bg);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.lancet {
+  border-radius: var(--lancet);
+}
+.lancet-sm {
+  border-radius: var(--lancet-sm);
+}
+
+}
+
+/* Conversion pulse on the rose window. */
+@keyframes gw-pulse {
+  0% {
+    box-shadow: var(--glow);
+  }
+  70% {
+    box-shadow: var(--glow);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.pane-pulse {
+  animation: gw-pulse 1200ms ease-out both;
+}
+
+@keyframes gw-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.reveal-once {
+  animation: gw-fade-in 300ms ease-out both;
+}
+
+@keyframes gw-toast-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.toast-in {
+  animation: gw-toast-in 200ms ease-out both;
+}
+
+@keyframes gw-shimmer {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}
+.skeleton {
+  background: var(--panel);
+  border-radius: 4px;
+  animation: gw-shimmer 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+  .pane-pulse {
+    animation: none;
+    outline: 3px solid var(--gold-bright);
+    outline-offset: 1px;
+  }
+  .reveal-once,
+  .toast-in,
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Wavy underline for heresy findings. */
+.heresy-underline {
+  text-decoration: underline wavy var(--heresy);
+  text-underline-offset: 4px;
+}

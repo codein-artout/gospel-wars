@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M3 Tokens, fonts and the shell**
+Current milestone: **M4 Shared components**
 
 ## Plan
 
@@ -8,7 +8,7 @@ Current milestone: **M3 Tokens, fonts and the shell**
 |---|---|---|
 | 1 | Orient: specs read, STATUS/DECISIONS/CLAUDE.md | done |
 | 2 | Scaffold: Next + TS strict + Tailwind + pnpm, ESLint/Prettier, Vitest, Playwright + axe, scripts, CI | done |
-| 3 | Tokens, fonts, AppShell, `/dev/components` | todo |
+| 3 | Tokens, fonts, AppShell, `/dev/components` | done |
 | 4 | Shared components with states, RoseWindow geometry + LeaningBar tests | todo |
 | 5 | Data model (Prisma), migrations on Postgres and PGlite | todo |
 | 6 | Rules engine (`lib/game`), exhaustive + property tests | todo |
