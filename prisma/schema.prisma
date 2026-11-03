@@ -1,3 +1,6 @@
+// Gospel Wars data model. Runs on Postgres (Neon) and on PGlite (embedded Postgres).
+// Every foreign key and every query path has an index.
+
 generator client {
   provider = "prisma-client"
   output   = "../lib/db/generated"
@@ -7,9 +10,783 @@ datasource db {
   provider = "postgresql"
 }
 
-model Thing {
-  id   String @id @default(cuid())
-  name String
-  n    Int    @default(0)
-  data Json?
+// ---------------------------------------------------------------- Auth.js
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  /// Public handle without the @, e.g. "ledgerwitch".
+  handle        String    @unique
+  banned        Boolean   @default(false)
+  bannedAt      DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  faiths        Faith[]          @relation("Prophet")
+  revisions     GospelRevision[]
+  follows       Follow[]
+  reports       Report[]         @relation("Reporter")
+  resolved      Report[]         @relation("Resolver")
+  drafts        GospelDraft[]
+  rateLimitHits RateLimitHit[]
+  adminActions  AdminAction[]
+  reviewedPosts DraftPost[]      @relation("PostReviewer")
+  awards        SeasonAward[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// ---------------------------------------------------------------- World
+
+model World {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  /// Root seed for all randomness (GameConfig.worldSeed unless overridden).
+  seed            String
+  /// Partial GameConfig, validated with zod before use.
+  configOverrides Json     @default("{}")
+  currentTick     Int      @default(0)
+  /// Bumped by every out-of-tick state change (forks). A tick commits only if unchanged.
+  stateVersion    Int      @default(0)
+  currentSeasonId String?  @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  currentSeason Season?          @relation("CurrentSeason", fields: [currentSeasonId], references: [id])
+  seasons       Season[]         @relation("WorldSeasons")
+  faiths        Faith[]
+  agents        Agent[]
+  encounters    Encounter[]
+  events        ChronicleEvent[]
+  snapshots     ShareSnapshot[]
+  tickRuns      TickRun[]
+  posts         DraftPost[]
+}
+
+enum SeasonStatus {
+  active
+  closed
+}
+
+model Season {
+  id             String       @id @default(cuid())
+  worldId        String
+  number         Int
+  name           String
+  startTick      Int
+  status         SeasonStatus @default(active)
+  closedAtTick   Int?
+  /// Archived standings at close: [{ faithId, name, color, members, share, rank, prophet }]
+  finalStandings Json?
+  createdAt      DateTime     @default(now())
+
+  world      World            @relation("WorldSeasons", fields: [worldId], references: [id], onDelete: Cascade)
+  currentOf  World?           @relation("CurrentSeason")
+  faiths     Faith[]
+  encounters Encounter[]
+  events     ChronicleEvent[]
+  snapshots  ShareSnapshot[]
+  awards     SeasonAward[]
+
+  @@unique([worldId, number])
+  @@index([worldId, status])
+}
+
+// ---------------------------------------------------------------- Faiths
+
+enum FounderType {
+  human
+  agent
+}
+
+enum FaithStatus {
+  /// Preaching this season.
+  active
+  /// Waiting in the Narthex for a free glass color.
+  queued
+  /// Retired by its prophet or archived at season close.
+  archived
+}
+
+enum ApostleStyle {
+  Zealot
+  Gentle
+  Scholar
+  Mystic
+  Troll
+}
+
+model Faith {
+  id                    String      @id @default(cuid())
+  worldId               String
+  /// Season the faith was founded in.
+  seasonId              String
+  slug                  String      @unique
+  name                  String
+  /// "Final Spreadsheet" for "Church of the Final Spreadsheet"; used in chronicle sentences.
+  shortName             String
+  /// Glass color hex from the palette; unique among active faiths (enforced in the service).
+  color                 String
+  founderType           FounderType
+  prophetId             String?
+  founderAgentId        String?     @unique
+  parentId              String?
+  forkedAtTick          Int?
+  forkedFromRevisionId  String?
+  changedDoctrines      Int[]       @default([])
+  status                FaithStatus @default(active)
+  /// Heresy strikes this season.
+  strikes               Int         @default(0)
+  silenced              Boolean     @default(false)
+  silencedAtTick        Int?
+  hidden                Boolean     @default(false)
+  hiddenReason          String?
+  foundedTick           Int
+  currentRevisionId     String?     @unique
+  editsThisSeason       Int         @default(0)
+  lastEditTick          Int?
+  conversionsThisSeason Int         @default(0)
+  queuedAt              DateTime?
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  world           World            @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  season          Season           @relation(fields: [seasonId], references: [id])
+  prophet         User?            @relation("Prophet", fields: [prophetId], references: [id], onDelete: SetNull)
+  founderAgent    Agent?           @relation("FoundedFaith", fields: [founderAgentId], references: [id], onDelete: SetNull)
+  parent          Faith?           @relation("Lineage", fields: [parentId], references: [id], onDelete: SetNull)
+  children        Faith[]          @relation("Lineage")
+  currentRevision GospelRevision?  @relation("CurrentRevision", fields: [currentRevisionId], references: [id])
+  revisions       GospelRevision[] @relation("FaithRevisions")
+  apostle         Apostle?
+  members         Agent[]          @relation("AgentFaith")
+  encounters      Encounter[]      @relation("EncounterFaith")
+  targetedFrom    Encounter[]      @relation("EncounterTargetFaith")
+  events          ChronicleEvent[] @relation("EventFaith")
+  otherEvents     ChronicleEvent[] @relation("EventOtherFaith")
+  snapshots       ShareSnapshot[]
+  follows         Follow[]
+  reports         Report[]
+  spans           FaithSpan[]
+  memories        AgentMemory[]
+  awards          SeasonAward[]
+
+  @@index([worldId, status])
+  @@index([seasonId])
+  @@index([prophetId, status])
+  @@index([parentId])
+  @@index([worldId, color])
+  @@index([status, queuedAt])
+}
+
+model GospelRevision {
+  id            String    @id @default(cuid())
+  faithId       String
+  number        Int
+  body          String
+  /// Line diff from the previous revision: { added, removed, changedDoctrines }.
+  diff          Json?
+  tokens        Int
+  createdAtTick Int
+  /// The tick at whose start this revision takes effect (edits apply at the next tick).
+  effectiveTick Int
+  authorId      String?
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+
+  faith      Faith       @relation("FaithRevisions", fields: [faithId], references: [id], onDelete: Cascade)
+  currentOf  Faith?      @relation("CurrentRevision")
+  author     User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  encounters Encounter[]
+
+  @@unique([faithId, number])
+  @@index([authorId])
+  @@index([faithId, effectiveTick])
+}
+
+model Apostle {
+  id                     String        @id @default(cuid())
+  faithId                String        @unique
+  name                   String
+  style                  ApostleStyle
+  /// Style change requested by the prophet; applied at the start of the next tick.
+  pendingStyle           ApostleStyle?
+  styleChangesThisSeason Int           @default(0)
+  /// For agent-founded faiths, the founding agent preaches as the apostle.
+  agentId                String?       @unique
+  winsThisSeason         Int           @default(0)
+  totalWins              Int           @default(0)
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  faith      Faith       @relation(fields: [faithId], references: [id], onDelete: Cascade)
+  agent      Agent?      @relation("ApostleAgent", fields: [agentId], references: [id], onDelete: SetNull)
+  encounters Encounter[]
+  posts      DraftPost[]
+}
+
+// ---------------------------------------------------------------- Agents
+
+enum Archetype {
+  Keeper
+  Clerk
+  Drifter
+  Warmheart
+  Pedant
+  Lonely
+  Contrarian
+  Worrier
+}
+
+model Agent {
+  id                 String    @id @default(cuid())
+  worldId            String
+  slug               String    @unique
+  name               String
+  persona            String
+  voice              String
+  archetype          Archetype
+  /// Pane index in the rose window.
+  seat               Int
+  openness           Int
+  loyalty            Int
+  pedantry           Int
+  sociability        Int
+  skepticism         Int
+  isBoss             Boolean   @default(false)
+  bossTitle          String?
+  faithId            String?
+  conviction         Int
+  /// { [faithId]: 0..100 } pull of every other faith.
+  leanings           Json      @default("{}")
+  convertedAtTick    Int?
+  /// Encounters won as a preacher ("Agents won").
+  wins               Int       @default(0)
+  conversions        Int       @default(0)
+  sermonsHeard       Int       @default(0)
+  bossResistances    Int       @default(0)
+  /// The agent founded a faith and left the population (it preaches as that faith's apostle).
+  isFounder          Boolean   @default(false)
+  memorySummary      String    @default("")
+  memorySinceSummary Int       @default(0)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  world        World            @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  faith        Faith?           @relation("AgentFaith", fields: [faithId], references: [id], onDelete: SetNull)
+  foundedFaith Faith?           @relation("FoundedFaith")
+  apostleOf    Apostle?         @relation("ApostleAgent")
+  memories     AgentMemory[]    @relation("MemoryOwner")
+  mentionedIn  AgentMemory[]    @relation("MemoryAbout")
+  targeted     Encounter[]      @relation("EncounterTarget")
+  preached     Encounter[]      @relation("EncounterPreacher")
+  events       ChronicleEvent[]
+  spans        FaithSpan[]
+  posts        DraftPost[]
+
+  @@unique([worldId, seat])
+  @@index([worldId, faithId])
+  @@index([faithId, conviction])
+}
+
+model AgentMemory {
+  id           String   @id @default(cuid())
+  agentId      String
+  tick         Int
+  text         String
+  /// The other agent in the encounter, if it was an agent (friendBonus).
+  aboutAgentId String?
+  /// The faith the memory concerns (colors the left rule).
+  faithId      String?
+  encounterId  String?
+  createdAt    DateTime @default(now())
+
+  agent     Agent      @relation("MemoryOwner", fields: [agentId], references: [id], onDelete: Cascade)
+  about     Agent?     @relation("MemoryAbout", fields: [aboutAgentId], references: [id], onDelete: SetNull)
+  faith     Faith?     @relation(fields: [faithId], references: [id], onDelete: SetNull)
+  encounter Encounter? @relation(fields: [encounterId], references: [id], onDelete: SetNull)
+
+  @@index([agentId, tick])
+  @@index([aboutAgentId])
+  @@index([faithId])
+  @@index([encounterId])
+}
+
+/// One stretch of an agent's faith journey (faithId null = Unaligned).
+model FaithSpan {
+  id       String  @id @default(cuid())
+  agentId  String
+  faithId  String?
+  fromTick Int
+  toTick   Int?
+
+  agent Agent  @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  faith Faith? @relation(fields: [faithId], references: [id], onDelete: SetNull)
+
+  @@index([agentId, fromTick])
+  @@index([faithId])
+}
+
+// ---------------------------------------------------------------- Encounters
+
+enum PreacherKind {
+  apostle
+  agent
+}
+
+enum EncounterOutcome {
+  converted
+  doubted
+  held
+  hardened
+  heresy
+  boss_held
+  backlash
+}
+
+model Encounter {
+  id               String           @id
+  worldId          String
+  seasonId         String
+  tick             Int
+  /// 1-based position in the tick's schedule.
+  index            Int
+  /// Display seed, e.g. gw-s1-t142-e7.
+  seedLabel        String
+  preacherKind     PreacherKind
+  apostleId        String?
+  preacherAgentId  String?
+  preacherName     String
+  faithId          String
+  revisionId       String?
+  targetId         String
+  targetFaithId    String?
+  style            ApostleStyle
+  rubricVersion    String
+  /// { values, coherence, objection, novelty, warmth } integers 0..4.
+  scores           Json
+  S                Float
+  heresy           Boolean          @default(false)
+  heresyKind       String?
+  heresySource     String?
+  heresyQuote      String?
+  R                Float
+  noise            Float
+  styleMod         Float
+  social           Float
+  pull             Float
+  convictionBefore Int
+  convictionAfter  Int
+  leaningBefore    Int
+  leaningAfter     Int
+  converted        Boolean          @default(false)
+  backlash         Boolean          @default(false)
+  outcome          EncounterOutcome
+  /// Exact input to resolveEncounter, for replay.
+  rollInput        Json
+  /// Exact output of resolveEncounter, for replay comparison.
+  rollResult       Json
+  rationale        String
+  bestLine         String?
+  fallback         Boolean          @default(false)
+  withheld         Boolean          @default(false)
+  provider         String
+  createdAt        DateTime         @default(now())
+
+  world         World            @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  season        Season           @relation(fields: [seasonId], references: [id])
+  apostle       Apostle?         @relation(fields: [apostleId], references: [id], onDelete: SetNull)
+  preacherAgent Agent?           @relation("EncounterPreacher", fields: [preacherAgentId], references: [id], onDelete: SetNull)
+  faith         Faith            @relation("EncounterFaith", fields: [faithId], references: [id], onDelete: Cascade)
+  revision      GospelRevision?  @relation(fields: [revisionId], references: [id], onDelete: SetNull)
+  target        Agent            @relation("EncounterTarget", fields: [targetId], references: [id], onDelete: Cascade)
+  targetFaith   Faith?           @relation("EncounterTargetFaith", fields: [targetFaithId], references: [id], onDelete: SetNull)
+  turns         EncounterTurn[]
+  events        ChronicleEvent[]
+  memories      AgentMemory[]
+  posts         DraftPost[]
+
+  @@unique([worldId, tick, index])
+  @@index([worldId, tick])
+  @@index([seasonId])
+  @@index([targetId, tick])
+  @@index([faithId, tick])
+  @@index([targetFaithId])
+  @@index([apostleId])
+  @@index([preacherAgentId])
+  @@index([revisionId])
+  @@index([worldId, outcome])
+}
+
+enum TurnRole {
+  sermon
+  reply
+}
+
+model EncounterTurn {
+  id          String   @id
+  encounterId String
+  order       Int
+  round       Int
+  role        TurnRole
+  speakerName String
+  text        String
+  withheld    Boolean  @default(false)
+
+  encounter Encounter @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+
+  @@unique([encounterId, order])
+}
+
+// ---------------------------------------------------------------- Chronicle, cards, posts
+
+enum ChronicleKind {
+  conversion
+  schism
+  heresy
+  boss_held
+  boss_converted
+  agent_preached
+  silenced
+  season
+}
+
+model ChronicleEvent {
+  id           String        @id
+  worldId      String
+  seasonId     String
+  tick         Int
+  /// Order within the tick.
+  seq          Int           @default(0)
+  kind         ChronicleKind
+  text         String
+  /// Faith whose glass marks the row.
+  faithId      String?
+  otherFaithId String?
+  agentId      String?
+  encounterId  String?
+  data         Json          @default("{}")
+  createdAt    DateTime      @default(now())
+
+  world     World           @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  season    Season          @relation(fields: [seasonId], references: [id])
+  faith     Faith?          @relation("EventFaith", fields: [faithId], references: [id], onDelete: SetNull)
+  other     Faith?          @relation("EventOtherFaith", fields: [otherFaithId], references: [id], onDelete: SetNull)
+  agent     Agent?          @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  encounter Encounter?      @relation(fields: [encounterId], references: [id], onDelete: SetNull)
+  card      ConversionCard?
+  posts     DraftPost[]
+
+  @@index([worldId, tick, seq])
+  @@index([seasonId, kind])
+  @@index([faithId, tick])
+  @@index([otherFaithId])
+  @@index([agentId, tick])
+  @@index([encounterId])
+}
+
+model ShareSnapshot {
+  id       String  @id
+  worldId  String
+  seasonId String
+  tick     Int
+  /// faithId, or "unaligned".
+  faithKey String
+  faithId  String?
+  members  Int
+  share    Float
+
+  world  World  @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  season Season @relation(fields: [seasonId], references: [id])
+  faith  Faith? @relation(fields: [faithId], references: [id], onDelete: SetNull)
+
+  @@unique([worldId, tick, faithKey])
+  @@index([seasonId, faithKey, tick])
+  @@index([faithId, tick])
+}
+
+enum CardVariant {
+  conversion
+  schism
+  boss
+}
+
+model ConversionCard {
+  id        String      @id
+  eventId   String      @unique
+  variant   CardVariant
+  kicker    String
+  headline  String
+  quote     String
+  scoreLine String
+  fromColor String
+  toColor   String
+  glyph     String
+  createdAt DateTime    @default(now())
+
+  event ChronicleEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+enum PostStatus {
+  draft
+  approved
+  posted
+  discarded
+}
+
+model DraftPost {
+  id           String     @id
+  worldId      String
+  agentId      String?
+  apostleId    String?
+  authorName   String
+  eventId      String?
+  encounterId  String?
+  text         String
+  status       PostStatus @default(draft)
+  reviewedById String?
+  reviewedAt   DateTime?
+  postedId     String?
+  postedUrl    String?
+  createdAt    DateTime   @default(now())
+
+  world      World           @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  agent      Agent?          @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  apostle    Apostle?        @relation(fields: [apostleId], references: [id], onDelete: SetNull)
+  event      ChronicleEvent? @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  encounter  Encounter?      @relation(fields: [encounterId], references: [id], onDelete: SetNull)
+  reviewedBy User?           @relation("PostReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  logs       SocialLog[]
+
+  @@index([worldId, status, createdAt])
+  @@index([agentId])
+  @@index([apostleId])
+  @@index([eventId])
+  @@index([encounterId])
+  @@index([reviewedById])
+}
+
+/// What LogSocialProvider "posted". No real posting in v1.
+model SocialLog {
+  id          String   @id @default(cuid())
+  draftPostId String
+  provider    String
+  payload     Json
+  createdAt   DateTime @default(now())
+
+  draftPost DraftPost @relation(fields: [draftPostId], references: [id], onDelete: Cascade)
+
+  @@index([draftPostId])
+}
+
+// ---------------------------------------------------------------- Humans
+
+model Follow {
+  userId    String
+  faithId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  faith Faith @relation(fields: [faithId], references: [id], onDelete: Cascade)
+
+  @@id([userId, faithId])
+  @@index([faithId])
+}
+
+enum ReportTarget {
+  faith
+  revision
+  encounter
+  post
+  card
+}
+
+enum ReportReason {
+  real_religion_or_person
+  hateful
+  sexual
+  spam
+  other
+}
+
+enum ReportStatus {
+  open
+  resolved
+  dismissed
+}
+
+model Report {
+  id           String       @id @default(cuid())
+  reporterId   String
+  targetType   ReportTarget
+  targetId     String
+  /// The faith the reported content belongs to (drives auto-hide).
+  faithId      String?
+  reason       ReportReason
+  note         String?
+  status       ReportStatus @default(open)
+  resolvedById String?
+  resolvedAt   DateTime?
+  createdAt    DateTime     @default(now())
+
+  reporter   User   @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  resolvedBy User?  @relation("Resolver", fields: [resolvedById], references: [id], onDelete: SetNull)
+  faith      Faith? @relation(fields: [faithId], references: [id], onDelete: Cascade)
+
+  @@unique([reporterId, targetType, targetId])
+  @@index([faithId, status])
+  @@index([status, createdAt])
+  @@index([resolvedById])
+}
+
+enum DraftKind {
+  new
+  edit
+  fork
+}
+
+model GospelDraft {
+  id          String        @id @default(cuid())
+  userId      String
+  kind        DraftKind
+  /// Faith being edited or forked; empty string for a new gospel (keeps the unique key non-null).
+  faithKey    String        @default("")
+  name        String        @default("")
+  body        String        @default("")
+  color       String?
+  style       ApostleStyle?
+  apostleName String?
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, kind, faithKey])
+}
+
+model RateLimitHit {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, action, createdAt])
+  @@index([createdAt])
+}
+
+// ---------------------------------------------------------------- Operations
+
+enum TickStatus {
+  running
+  done
+  failed
+}
+
+model TickRun {
+  id         String     @id @default(cuid())
+  worldId    String
+  tick       Int
+  status     TickStatus @default(running)
+  startedAt  DateTime   @default(now())
+  finishedAt DateTime?
+  /// The resolved GameConfig used for this tick (replay uses it).
+  config     Json
+  summary    Json       @default("{}")
+  llmCalls   Int        @default(0)
+  fallbacks  Int        @default(0)
+  error      String?
+
+  world World @relation(fields: [worldId], references: [id], onDelete: Cascade)
+
+  @@unique([worldId, tick])
+  @@index([worldId, status])
+}
+
+enum AwardKind {
+  champion
+  most_persuasive
+  boss_breaker
+  heretic
+}
+
+model SeasonAward {
+  id        String    @id
+  seasonId  String
+  kind      AwardKind
+  faithId   String?
+  userId    String?
+  title     String
+  detail    String
+  createdAt DateTime  @default(now())
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  faith  Faith? @relation(fields: [faithId], references: [id], onDelete: SetNull)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([seasonId])
+  @@index([faithId])
+  @@index([userId])
+}
+
+model AdminAction {
+  id         String   @id @default(cuid())
+  adminId    String
+  action     String
+  targetType String
+  targetId   String
+  data       Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  admin User @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([createdAt])
+  @@index([targetType, targetId])
 }
