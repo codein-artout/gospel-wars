@@ -87,6 +87,9 @@ importers:
       '@testing-library/react':
         specifier: 16.3.3
         version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@types/hast':
+        specifier: 3.0.4
+        version: 3.0.4
       '@types/node':
         specifier: 24.19.2
         version: 24.19.2
@@ -1208,8 +1211,8 @@ packages:
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
-  '@types/hast@3.0.5':
-    resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
+  '@types/hast@3.0.4':
+    resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -4510,7 +4513,7 @@ snapshots:
 
   '@types/geojson@7946.0.16': {}
 
-  '@types/hast@3.0.5':
+  '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.3
 
@@ -5745,14 +5748,14 @@ snapshots:
 
   hast-util-sanitize@5.0.2:
     dependencies:
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@ungap/structured-clone': 1.4.0
       unist-util-position: 5.0.0
 
   hast-util-to-jsx-runtime@2.3.7:
     dependencies:
       '@types/estree': 1.0.10
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/unist': 3.0.3
       comma-separated-tokens: 2.0.3
       devlop: 1.1.0
@@ -5771,7 +5774,7 @@ snapshots:
 
   hast-util-whitespace@3.0.0:
     dependencies:
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
 
   hermes-estree@0.25.1: {}
 
@@ -6135,7 +6138,7 @@ snapshots:
   mdast-util-mdx-expression@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
       mdast-util-from-markdown: 2.1.0
@@ -6146,7 +6149,7 @@ snapshots:
   mdast-util-mdx-jsx@3.2.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
       ccount: 2.0.1
@@ -6163,7 +6166,7 @@ snapshots:
   mdast-util-mdxjs-esm@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
       mdast-util-from-markdown: 2.1.0
@@ -6178,7 +6181,7 @@ snapshots:
 
   mdast-util-to-hast@13.2.1:
     dependencies:
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       '@ungap/structured-clone': 1.4.0
       devlop: 1.1.0
@@ -6717,7 +6720,7 @@ snapshots:
 
   rehype-sanitize@6.0.0:
     dependencies:
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       hast-util-sanitize: 5.0.2
 
   remark-parse@11.0.0:
@@ -6731,7 +6734,7 @@ snapshots:
 
   remark-rehype@11.1.2:
     dependencies:
-      '@types/hast': 3.0.5
+      '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       mdast-util-to-hast: 13.2.1
       unified: 11.0.5

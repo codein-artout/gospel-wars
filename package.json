@@ -54,6 +54,7 @@
     "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.4",
     "@testing-library/react": "16.3.3",
+    "@types/hast": "3.0.4",
     "@types/node": "24.19.2",
     "@types/nodemailer": "8.0.2",
     "@types/pg": "8.23.1",
