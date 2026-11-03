@@ -18,13 +18,16 @@ export function authSecret(): string {
   return secret;
 }
 
+/** The seeded admin account, the default allowlist where the dev login is on and ADMIN_EMAILS is unset. */
+export const DEV_ADMIN_EMAIL = 'admin@gospelwars.test';
+
 export function adminEmails(): Set<string> {
-  return new Set(
-    (process.env.ADMIN_EMAILS ?? '')
-      .split(',')
-      .map((e) => e.trim().toLowerCase())
-      .filter(Boolean),
-  );
+  const list = (process.env.ADMIN_EMAILS ?? '')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  if (list.length === 0 && devLoginEnabled()) list.push(DEV_ADMIN_EMAIL);
+  return new Set(list);
 }
 
 export function isAdminEmail(email: string | null | undefined): boolean {
