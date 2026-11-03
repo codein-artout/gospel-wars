@@ -65,7 +65,20 @@ Then `pnpm dev` and open http://localhost:3000. Dev login: `admin@gospelwars.tes
 
 ## Clean-room verification
 
-Run after deleting `node_modules`, `.next`, `.pglite*` and the generated Prisma client, with no env vars set. Results are filled in by the final run.
+Run on a fresh `git clone` of this branch (no `node_modules`, `.next`, `.pglite*` or generated client) with no app env vars set:
+
+| Step | Result |
+|---|---|
+| `pnpm install` | ok (postinstall generates the Prisma client) |
+| `pnpm db:migrate` | ok, 4s (PGlite) |
+| `pnpm db:seed` | ok, 27s: 140 ticks, 2,626 encounters, 78 conversions, 1 human fork, 2 agent schisms, 2 heresy strikes, 75 boss resistances, 87 cards, 165 draft posts |
+| `pnpm build` | ok, 25s, no warnings |
+| `pnpm lint && pnpm typecheck` | ok, zero warnings |
+| `pnpm test` | ok: 19 files, 392 passed, 1 skipped (the opt-in live LLM test) |
+| `pnpm test:e2e` | ok: 13 passed, axe clean on every page |
+| `pnpm tick` | ok: "Tick 141 done. 0 conversions. 24 encounters, …" |
+
+Determinism: seeding the clean clone and this checkout gives the same world digest (`pnpm tsx scripts/dump.ts` → `994096ad2ae4e32a`).
 
 ## Known gaps
 
