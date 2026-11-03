@@ -26,7 +26,7 @@ export function LeaningBar({ name, color, value, threshold }: Props) {
         <div
           data-testid="leaning-fill"
           className="h-[18px] rounded-[2px]"
-          style={{ width: `${pct}%`, background: color, opacity: 0.85 }}
+          style={{ width: `${pct}%`, background: color, opacity: 0.55 }}
         />
         <span
           data-testid="leaning-threshold"

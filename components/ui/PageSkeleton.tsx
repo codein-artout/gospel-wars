@@ -1,7 +1,7 @@
-import { Skeleton } from '@/components/ui/States';
+import { Skeleton } from './States';
 
-/** Route-level loading state: the page header and two columns, as skeletons. */
-export default function Loading() {
+/** Generic route loading state: the page header and two columns, as skeletons. */
+export function PageSkeleton({ round = true }: { round?: boolean }) {
   return (
     <main className="flex flex-col gap-7 px-4 pb-12 pt-5 md:px-9 md:pt-7" aria-busy="true" aria-label="Loading">
       <div className="flex flex-col gap-2">
@@ -10,7 +10,7 @@ export default function Loading() {
       </div>
       <div className="flex flex-wrap gap-7">
         <div className="flex min-w-0 flex-[3_1_520px] flex-col items-center gap-4">
-          <Skeleton className="aspect-square w-full max-w-[660px] rounded-full" />
+          {round ? <Skeleton className="aspect-square w-full max-w-[660px] rounded-full" /> : <Skeleton className="h-[480px] w-full" />}
         </div>
         <div className="flex min-w-0 flex-[2_1_320px] flex-col gap-4">
           <Skeleton className="h-48 w-full" />

@@ -64,9 +64,9 @@ export async function loadNave(): Promise<NaveData | null> {
   const faithById = new Map(faiths.map((f) => [f.id, f]));
   const memoryByAgent = new Map(memories.map((m) => [m.agentId, m.text]));
 
-  // Founders preach for their faiths and leave the window's population (GAME.md §10.3).
+  // Founders preach for their faiths and leave the share count, but stay visible in the window (GAME.md §10.3).
   const population = agents.filter((a) => !a.isFounder);
-  const panes: RosePane[] = population.map((a) => {
+  const panes: RosePane[] = agents.map((a) => {
     const found = a.faithId ? faithById.get(a.faithId) : undefined;
     // Hidden faiths (reported) do not show their name or glass on public pages.
     const f = found && !found.hidden ? found : undefined;
@@ -79,9 +79,10 @@ export async function loadNave(): Promise<NaveData | null> {
       color: f ? f.color : unaligned,
       isBoss: a.isBoss,
       agentFounded: f?.founderType === 'agent',
+      founder: a.isFounder,
     };
   });
-  const selected: SelectedAgent[] = population.map((a) => {
+  const selected: SelectedAgent[] = agents.map((a) => {
     const found = a.faithId ? faithById.get(a.faithId) : undefined;
     const f = found && !found.hidden ? found : undefined;
     const memory = memoryByAgent.get(a.id) ?? null;
@@ -89,7 +90,7 @@ export async function loadNave(): Promise<NaveData | null> {
       id: a.id,
       slug: a.slug,
       name: a.name,
-      faithLabel: a.isBoss && !f ? 'Boss skeptic, unconverted' : (f?.name ?? 'Unaligned'),
+      faithLabel: a.isBoss && !f ? 'Boss skeptic, unconverted' : a.isFounder && f ? `Founder of the ${f.shortName}` : (f?.name ?? 'Unaligned'),
       color: f ? f.color : unaligned,
       isBoss: a.isBoss,
       persona: a.persona,

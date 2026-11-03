@@ -15,6 +15,8 @@ export type RosePane = {
   isBoss: boolean;
   /** The agent's faith was founded by an agent: dashed gold lead. */
   agentFounded?: boolean;
+  /** Founded a faith and preaches as its apostle (outside the share count). */
+  founder?: boolean;
 };
 
 type Props = {
@@ -174,7 +176,9 @@ export function RoseWindow({ agents, shares, tick, selectedId, onSelect, compact
           ? unconvertedBoss
             ? 'boss skeptic, unconverted'
             : `boss skeptic, converted to ${a.faithName}`
-          : a.faithName;
+          : a.founder
+            ? `founder of ${a.faithName}`
+            : a.faithName;
         return (
           <button
             key={a.id}
