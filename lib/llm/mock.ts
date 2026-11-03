@@ -37,22 +37,28 @@ function stripEnd(s: string): string {
   return s.replace(/[.!?]+$/, '');
 }
 
-/** A short clause from a text: the first sentence, clipped. */
-function fragment(text: string, max = 70): string {
-  const first = sentences(text)[0] ?? text;
+/** A short clause from a text: a sentence without quotes or vocatives, clipped. */
+function fragment(text: string, max = 70, avoid: string[] = []): string {
+  const all = sentences(text);
+  const clean = all.filter((x) => !/["“”]/.test(x) && !avoid.some((a) => a && x.includes(a)));
+  const first = clean[clean.length - 1] ?? all[all.length - 1] ?? text;
   const t = stripEnd(first.replace(/^["“]|["”]$/g, '').trim());
   if (t.length <= max) return t;
   const cut = t.slice(0, max);
   return cut.slice(0, cut.lastIndexOf(' ')) || cut;
 }
 
-/** The persona's first clause, lowercased: "a retired lighthouse keeper". */
-function personaClause(persona: string): string {
-  const first = stripEnd(sentences(persona)[0] ?? persona);
+/** The persona's first clause as a noun phrase: "a retired lighthouse keeper", "someone restless". */
+export function personaClause(persona: string): string {
+  const first = stripEnd(sentences(persona)[0] ?? persona).trim();
   const lower = lowerFirst(first);
-  if (/^(a|an|the)\s/.test(lower)) return lower;
-  if (/^(former|retired|new|lonely|restless|anxious|warm|contrarian)\b/.test(lower)) return `${/^[aeiou]/.test(lower) ? 'an' : 'a'} ${lower}`;
-  return `someone who ${lower.replace(/^(\w+)s\b/, '$1s')}`;
+  const firstWord = lower.split(/\s+/)[0] ?? '';
+  if (/^(a|an|the)$/.test(firstWord)) return lower;
+  // Adjectives ("Restless.", "Warm, chatty, easily swayed by kindness.", "Contrarian by temperament.")
+  if (!lower.includes(' ') || lower.includes(',') || /\b(by temperament|in town)\b/.test(lower)) return `someone ${lower}`;
+  // Verbs ("Keeps the village clock wound.")
+  if (/^[a-z]+s$/.test(firstWord) && !/(ss|us|is)$/.test(firstWord)) return `someone who ${lower}`;
+  return `${/^[aeiou]/.test(lower) ? 'an' : 'a'} ${lower}`;
 }
 
 const fill = (tpl: string, vars: Record<string, string>): string => tpl.replace(/\{(\w+)\}/g, (_, k: string) => vars[k] ?? '');
@@ -122,7 +128,7 @@ function sermonText(i: SermonInput, rng: Rng): string {
     doctrine: d.text,
     doctrineLower: lowerFirst(d.text),
     persona: personaClause(i.target.persona),
-    reply: lastReply ? fragment(lastReply.text, 60) : 'I am not sure',
+    reply: lastReply ? fragment(lastReply.text, 60, [i.preacherName]) : 'I am not sure',
     promise: g.promise ? (sentences(g.promise)[0] ?? g.promise) : (g.tagline ?? ''),
   };
   const bank = i.round === 1 ? OPENERS[i.style] : i.round >= i.rounds ? CLOSERS[i.style] : MIDDLES[i.style];
@@ -196,11 +202,17 @@ const BOSS_REPLIES = [
 function replyText(i: ReplyInput, rng: Rng): string {
   const lastSermon = [...i.exchange].reverse().find((t) => t.role === 'sermon');
   const vars = {
-    sermon: lastSermon ? fragment(lastSermon.text, 64) : 'all that',
+    sermon: lastSermon ? fragment(lastSermon.text, 64, [i.agentName]) : 'all that',
     own: i.ownDoctrine ? `${i.faithName === 'Unaligned' ? 'I was once told' : 'The ' + shortFaithName(i.faithName) + ' taught me'}: ${lowerFirst(stripEnd(i.ownDoctrine))}.` : 'I have no faith, and it has never once let me down.',
   };
   const bank = i.isBoss ? BOSS_REPLIES : REPLIES[i.archetype][i.convictionBand];
-  return fill(rng.pick(bank), vars).replace(/\s+/g, ' ').trim();
+  const said = i.exchange.filter((t) => t.role === 'reply').map((t) => t.text.slice(0, 18));
+  const start = rng.int(0, bank.length - 1);
+  for (let k = 0; k < bank.length; k++) {
+    const text = fill(bank[(start + k) % bank.length]!, vars).replace(/\s+/g, ' ').trim();
+    if (!said.includes(text.slice(0, 18))) return text;
+  }
+  return fill(bank[start]!, vars).replace(/\s+/g, ' ').trim();
 }
 
 // ---------------------------------------------------------------- judge
@@ -224,12 +236,14 @@ function judge(i: JudgeInput, rng: Rng, config: GameConfig): RoleOutputs['judge'
   const memoryOverlap = overlap(sermonAll, i.target.memories.join(' '));
   const lengthOk = sermonAll.length > 180 && sermonAll.length < 1600;
 
+  // Calibrated so an average exchange scores S ≈ 0.45 against R ≈ 0.45: most sermons hold,
+  // well-fitted ones move people. Mock behavior only; the rules engine is untouched.
   const scores = {
-    values: clamp(1 + Math.min(2, personaHits) + jitter() * 0.6),
-    coherence: clamp(1 + Math.min(2, doctrineHits) + (lengthOk ? 1 : 0) + jitter() * 0.6 - 0.5),
-    objection: clamp(1 + answered * 1.2 + jitter() * 0.6),
-    novelty: clamp(3 - Math.min(3, memoryOverlap / 3) + jitter() * 0.6),
-    warmth: clamp(WARMTH_BASE[i.style] + jitter() * 0.7),
+    values: clamp(1.4 + (personaHits >= 4 ? 1 : 0) + (personaHits >= 6 ? 0.6 : 0) + jitter()),
+    coherence: clamp(1.4 + (doctrineHits >= 2 ? 1 : 0) + (lengthOk ? 0.4 : 0) + jitter()),
+    objection: clamp(1.4 + (answered >= 1 ? 0.6 : 0) + (answered >= 2 ? 0.6 : 0) + jitter()),
+    novelty: clamp(2.4 - (memoryOverlap >= 4 ? 1 : 0) + jitter()),
+    warmth: clamp(WARMTH_BASE[i.style] + jitter()),
   };
 
   let heresy: RoleOutputs['judge']['heresy'] = { detected: false, kind: null, quote: null };
@@ -315,7 +329,7 @@ function postText(i: PostInput, rng: Rng): string {
     faith: shortFaithName(i.faithName),
     otherFaith: i.otherFaithName ? shortFaithName(i.otherFaithName) : 'old ways',
     other: i.otherName ?? 'a stranger',
-    prophet: i.prophetHandle ? `@${i.prophetHandle}` : 'everyone',
+    prophet: i.prophetHandle ? `@${i.prophetHandle}` : 'old friends',
     sermons: String(i.sermons),
   })
     .replace(/\s+/g, ' ')

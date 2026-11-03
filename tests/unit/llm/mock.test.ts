@@ -155,3 +155,19 @@ describe('LLMClient retry, fallback and budget', () => {
     expect(r.fallback).toBe(false);
   });
 });
+
+describe('persona clauses read as noun phrases', () => {
+  it.each([
+    ['Retired lighthouse keeper. Trusts routine, distrusts urgency.', 'a retired lighthouse keeper'],
+    ['Former tax clerk. Converts only for a clean argument.', 'a former tax clerk'],
+    ['Restless. Joins whatever sounds newest.', 'someone restless'],
+    ['Warm, chatty, easily swayed by kindness.', 'someone warm, chatty, easily swayed by kindness'],
+    ['A pedant. Counts contradictions out loud.', 'a pedant'],
+    ['Contrarian by temperament.', 'someone contrarian by temperament'],
+    ['Keeps the village clock wound. Suspects anything that rings early.', 'someone who keeps the village clock wound'],
+    ['Archivist of lost umbrellas. Loyal to things nobody comes back for.', 'an archivist of lost umbrellas'],
+  ])('%s', async (persona, expected) => {
+    const { personaClause } = await import('@/lib/llm/mock');
+    expect(personaClause(persona)).toBe(expected);
+  });
+});

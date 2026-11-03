@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M9 Tick engine**
+Current milestone: **M10 Seed**
 
 ## Plan
 
@@ -14,7 +14,7 @@ Current milestone: **M9 Tick engine**
 | 6 | Rules engine (`lib/game`), exhaustive + property tests | done |
 | 7 | Heresy linter, fencing, moderation, injection fixtures | done |
 | 8 | LLM layer: Mock + Anthropic providers, prompts, schemas, budget | done |
-| 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | todo |
+| 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | done (admin button lands with auth in M11/M12) |
 | 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | todo |
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | todo |
 | 12 | The Nave `/` | todo |
