@@ -155,8 +155,8 @@ export function RoseWindow({ agents, shares, tick, selectedId, onSelect, compact
       />
       {!compact ? (
         <>
-          <div aria-hidden="true" className="absolute rounded-full" style={{ inset: '15%', border: '2px solid var(--ring-line)' }} />
-          <div aria-hidden="true" className="absolute rounded-full" style={{ inset: '27%', border: '2px solid var(--ring-line)' }} />
+          <div aria-hidden="true" className="absolute rounded-full max-md:hidden" style={{ inset: '15%', border: '2px solid var(--ring-line)' }} />
+          <div aria-hidden="true" className="absolute rounded-full max-md:hidden" style={{ inset: '27%', border: '2px solid var(--ring-line)' }} />
         </>
       ) : null}
       {agents.map((a, i) => {

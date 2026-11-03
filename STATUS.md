@@ -1,6 +1,6 @@
 # STATUS
 
-Current milestone: **M12 The Nave**
+Current milestone: **M13 Faiths and seasons**
 
 ## Plan
 
@@ -17,7 +17,7 @@ Current milestone: **M12 The Nave**
 | 9 | Tick engine: `runTick`, `pnpm tick`, cron route, admin action, integration tests | done (admin button lands with auth in M11/M12) |
 | 10 | Seed: 48 agents, 6 faiths, 140 ticks of history | done (26s, deterministic) |
 | 11 | Auth: magic link, dev credentials, admin allowlist, middleware | done |
-| 12 | The Nave `/` | todo |
+| 12 | The Nave `/` | done |
 | 13 | Faiths `/faiths`, seasons `/seasons/[n]` | todo |
 | 14 | Faith page `/f/[slug]` | todo |
 | 15 | Write, edit, fork | todo |
